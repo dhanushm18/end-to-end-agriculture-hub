@@ -1,1 +1,2 @@
-weather_api_key = "9d7cde1f6d07ec55650544be1631307e"
+weather_api_key = "53344050f9721241c76a50f39c757208"
+google_ai_api_key = "AIzaSyBCDenzkhNP9l5awg9WYn15nkmlrRfDJ9U"

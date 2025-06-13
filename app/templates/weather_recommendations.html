@@ -1,0 +1,589 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+	<div class="container">
+		<h1 data-aos="fade-up">
+			<i class="fas fa-cloud-sun me-3"></i>Weather-Aware Recommendations
+		</h1>
+		<p data-aos="fade-up" data-aos-delay="200">
+			Get 7-day weather forecasts with intelligent agricultural recommendations tailored to upcoming weather conditions
+		</p>
+	</div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<!-- Info Cards -->
+			<div class="row mb-5">
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="100">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-calendar-week text-primary fa-2x mb-2"></i>
+						<h6 class="fw-bold">7-Day Forecast</h6>
+						<small class="text-muted">Detailed weather predictions</small>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="200">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-lightbulb text-warning fa-2x mb-2"></i>
+						<h6 class="fw-bold">Smart Recommendations</h6>
+						<small class="text-muted">AI-powered farming advice</small>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="300">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-shield-alt text-success fa-2x mb-2"></i>
+						<h6 class="fw-bold">Risk Prevention</h6>
+						<small class="text-muted">Protect crops from weather damage</small>
+					</div>
+				</div>
+			</div>
+
+			<!-- City Input -->
+			<div class="form-modern mb-5" data-aos="fade-up" data-aos-delay="400">
+				<div class="text-center mb-4">
+					<h3 class="text-gradient fw-bold">Enter Your Location</h3>
+					<p class="text-muted">Get weather forecast and farming recommendations for your area</p>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="input-group">
+							<input type="text" class="form-control form-control-modern" id="cityInput" 
+								   placeholder="Enter city name (e.g., New Delhi, Mumbai)" 
+								   onkeypress="handleKeyPress(event)">
+							<button class="btn btn-modern" type="button" id="getWeatherBtn" onclick="getWeatherForecast()">
+								<i class="fas fa-search me-1"></i>Get Forecast
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Loading Indicator -->
+			<div class="text-center mb-4" id="loadingIndicator" style="display: none;">
+				<div class="spinner-border text-primary" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<p class="mt-2 text-muted">Fetching weather data and generating recommendations...</p>
+			</div>
+
+			<!-- Weather Results -->
+			<div id="weatherResults" style="display: none;">
+				<!-- Current Weather -->
+				<div class="card-modern mb-4" id="currentWeather">
+					<!-- Current weather will be populated here -->
+				</div>
+
+				<!-- 7-Day Forecast -->
+				<div class="row" id="weeklyForecast">
+					<!-- Weekly forecast cards will be populated here -->
+				</div>
+			</div>
+
+			<!-- Error Message -->
+			<div class="alert alert-danger" id="errorMessage" style="display: none;">
+				<i class="fas fa-exclamation-triangle me-2"></i>
+				<span id="errorText"></span>
+			</div>
+
+			<!-- How it Works -->
+			<div class="mt-5" data-aos="fade-up">
+				<h4 class="text-center mb-4 fw-bold">How Weather-Aware Recommendations Work</h4>
+				<div class="row">
+					<div class="col-md-3 text-center mb-3">
+						<div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+							<i class="fas fa-map-marker-alt text-primary fa-2x"></i>
+						</div>
+						<h6 class="fw-bold">Location Input</h6>
+						<small class="text-muted">Enter your city or farm location</small>
+					</div>
+					<div class="col-md-3 text-center mb-3">
+						<div class="bg-info bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+							<i class="fas fa-cloud-download-alt text-info fa-2x"></i>
+						</div>
+						<h6 class="fw-bold">Weather Data</h6>
+						<small class="text-muted">Fetch 7-day detailed forecast</small>
+					</div>
+					<div class="col-md-3 text-center mb-3">
+						<div class="bg-warning bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+							<i class="fas fa-brain text-warning fa-2x"></i>
+						</div>
+						<h6 class="fw-bold">AI Analysis</h6>
+						<small class="text-muted">Analyze weather patterns</small>
+					</div>
+					<div class="col-md-3 text-center mb-3">
+						<div class="bg-success bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+							<i class="fas fa-clipboard-list text-success fa-2x"></i>
+						</div>
+						<h6 class="fw-bold">Recommendations</h6>
+						<small class="text-muted">Get actionable farming advice</small>
+					</div>
+				</div>
+			</div>
+
+			<!-- Benefits -->
+			<div class="mt-5" data-aos="fade-up">
+				<h4 class="text-center mb-4 fw-bold">Benefits of Weather-Aware Farming</h4>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-success bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-shield-alt text-success"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Crop Protection</h6>
+								<small class="text-muted">Protect crops from adverse weather conditions with timely warnings</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-tint text-primary"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Water Management</h6>
+								<small class="text-muted">Optimize irrigation based on rainfall predictions</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-calendar-check text-warning"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Activity Planning</h6>
+								<small class="text-muted">Plan farming activities based on weather conditions</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-info bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-chart-line text-info"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Yield Optimization</h6>
+								<small class="text-muted">Maximize crop yield with weather-informed decisions</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.weather-card {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border-radius: 15px;
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+	box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.forecast-card {
+	background: white;
+	border-radius: 15px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	transition: all 0.3s ease;
+	border-left: 4px solid #007bff;
+}
+
+.forecast-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.weather-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.temp-display {
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.recommendation-item {
+	background: #f8f9fa;
+	border-left: 3px solid #28a745;
+	padding: 0.75rem 1rem;
+	margin-bottom: 0.5rem;
+	border-radius: 0 8px 8px 0;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.alert-item {
+	background: #fff3cd;
+	border-left-color: #ffc107;
+	font-weight: 500;
+}
+
+.alert-item:contains("Alert"), .alert-item:contains("Warning") {
+	background: #f8d7da;
+	border-left-color: #dc3545;
+}
+
+.section-header {
+	background: linear-gradient(135deg, #007bff, #0056b3);
+	color: white;
+	padding: 0.75rem 1rem;
+	margin: 1rem 0 0.5rem 0;
+	border-radius: 8px;
+	font-weight: 600;
+	font-size: 1rem;
+	box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+}
+
+.section-spacer {
+	height: 0.5rem;
+}
+
+.activity-summary {
+	background: #f8f9ff;
+	border-radius: 10px;
+	padding: 1rem;
+	border: 1px solid #e9ecef;
+}
+
+.activity-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	font-size: 0.85rem;
+}
+
+.activity-item i {
+	color: #6c757d;
+}
+
+.recommendations-container {
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.border-danger {
+	border-color: #dc3545 !important;
+	border-width: 2px !important;
+}
+
+.bg-danger {
+	background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+}
+
+.day-header {
+	background: var(--gradient-primary);
+	color: white;
+	padding: 0.75rem 1rem;
+	border-radius: 10px 10px 0 0;
+	margin-bottom: 1rem;
+}
+
+.weather-details {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+.weather-detail-item {
+	text-align: center;
+	padding: 0.5rem;
+	background: rgba(255,255,255,0.1);
+	border-radius: 8px;
+}
+</style>
+
+<script>
+function getWeatherForecast() {
+	const city = document.getElementById('cityInput').value.trim();
+	
+	if (!city) {
+		showError('Please enter a city name');
+		return;
+	}
+	
+	// Show loading
+	document.getElementById('loadingIndicator').style.display = 'block';
+	document.getElementById('weatherResults').style.display = 'none';
+	document.getElementById('errorMessage').style.display = 'none';
+	
+	// Fetch weather data
+	fetch('/weather-forecast-api', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ city: city })
+	})
+	.then(response => response.json())
+	.then(data => {
+		document.getElementById('loadingIndicator').style.display = 'none';
+		
+		if (data.success) {
+			displayWeatherResults(data);
+		} else {
+			showError(data.error || 'Unable to fetch weather data');
+		}
+	})
+	.catch(error => {
+		document.getElementById('loadingIndicator').style.display = 'none';
+		showError('Network error. Please try again.');
+		console.error('Error:', error);
+	});
+}
+
+function displayWeatherResults(data) {
+	const weatherResults = document.getElementById('weatherResults');
+	const currentWeather = document.getElementById('currentWeather');
+	const weeklyForecast = document.getElementById('weeklyForecast');
+
+	// Display current weather
+	const current = data.weather.current;
+	currentWeather.innerHTML = `
+		<div class="weather-card">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h3><i class="fas fa-map-marker-alt me-2"></i>${data.weather.city}</h3>
+					<div class="temp-display">${Math.round(current.main.temp)}°C</div>
+					<p class="mb-0">${current.weather[0].description}</p>
+				</div>
+				<div class="col-md-6">
+					<div class="weather-details">
+						<div class="weather-detail-item">
+							<i class="fas fa-eye"></i>
+							<div>Feels like</div>
+							<div>${Math.round(current.main.feels_like)}°C</div>
+						</div>
+						<div class="weather-detail-item">
+							<i class="fas fa-tint"></i>
+							<div>Humidity</div>
+							<div>${current.main.humidity}%</div>
+						</div>
+						<div class="weather-detail-item">
+							<i class="fas fa-wind"></i>
+							<div>Wind</div>
+							<div>${current.wind.speed} m/s</div>
+						</div>
+						<div class="weather-detail-item">
+							<i class="fas fa-compress-arrows-alt"></i>
+							<div>Pressure</div>
+							<div>${current.main.pressure} hPa</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	`;
+	
+	// Display 7-day forecast with summary recommendations
+	weeklyForecast.innerHTML = '';
+
+	// Display weekly summary first
+	const summaryCard = document.createElement('div');
+	summaryCard.className = 'col-12 mb-4';
+
+	const weeklyOutlook = data.recommendations.weekly_outlook;
+	const summaryRecommendations = data.recommendations.summary;
+
+	// Activity status colors
+	const getActivityColor = (status) => {
+		switch(status) {
+			case 'Excellent': return 'success';
+			case 'Good': return 'warning';
+			case 'Limited': return 'danger';
+			case 'High': return 'danger';
+			case 'Moderate': return 'warning';
+			case 'Low': return 'success';
+			default: return 'secondary';
+		}
+	};
+
+	summaryCard.innerHTML = `
+		<div class="forecast-card border-primary" style="border-width: 3px !important;">
+			<div class="day-header" style="background: linear-gradient(135deg, #007bff, #0056b3);">
+				<div class="row align-items-center">
+					<div class="col-8">
+						<h4 class="mb-0"><i class="fas fa-chart-line me-2"></i>Weekly Weather Summary</h4>
+						<small>Smart recommendations for the next 7 days</small>
+					</div>
+					<div class="col-4 text-end">
+						<i class="fas fa-calendar-week fa-2x"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-4">
+				<!-- Weekly Outlook Stats -->
+				<div class="row mb-4">
+					<div class="col-md-3 col-6 text-center mb-3">
+						<div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-2">
+							<i class="fas fa-cloud-rain text-primary fa-2x"></i>
+						</div>
+						<h5 class="fw-bold mb-0">${weeklyOutlook.rain_days}</h5>
+						<small class="text-muted">Rainy Days</small>
+					</div>
+					<div class="col-md-3 col-6 text-center mb-3">
+						<div class="bg-danger bg-opacity-10 rounded-circle p-3 d-inline-block mb-2">
+							<i class="fas fa-thermometer-full text-danger fa-2x"></i>
+						</div>
+						<h5 class="fw-bold mb-0">${weeklyOutlook.hot_days}</h5>
+						<small class="text-muted">Hot Days (>35°C)</small>
+					</div>
+					<div class="col-md-3 col-6 text-center mb-3">
+						<div class="bg-info bg-opacity-10 rounded-circle p-3 d-inline-block mb-2">
+							<i class="fas fa-tint text-info fa-2x"></i>
+						</div>
+						<h5 class="fw-bold mb-0">${weeklyOutlook.high_humidity_days}</h5>
+						<small class="text-muted">High Humidity Days</small>
+					</div>
+					<div class="col-md-3 col-6 text-center mb-3">
+						<div class="bg-warning bg-opacity-10 rounded-circle p-3 d-inline-block mb-2">
+							<i class="fas fa-exclamation-triangle text-warning fa-2x"></i>
+						</div>
+						<h5 class="fw-bold mb-0">${data.recommendations.critical_alerts_count}</h5>
+						<small class="text-muted">Critical Alerts</small>
+					</div>
+				</div>
+
+				<!-- Activity Scores -->
+				<div class="activity-summary mb-4">
+					<h6 class="fw-bold mb-3">
+						<i class="fas fa-tasks me-2"></i>Weekly Activity Outlook
+					</h6>
+					<div class="row g-3">
+						<div class="col-md-3 col-6">
+							<div class="text-center">
+								<i class="fas fa-seedling fa-2x text-success mb-2"></i>
+								<div class="fw-bold">Planting</div>
+								<span class="badge bg-${getActivityColor(weeklyOutlook.planting_score)} px-3">${weeklyOutlook.planting_score}</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-6">
+							<div class="text-center">
+								<i class="fas fa-wheat-awn fa-2x text-warning mb-2"></i>
+								<div class="fw-bold">Harvesting</div>
+								<span class="badge bg-${getActivityColor(weeklyOutlook.harvesting_score)} px-3">${weeklyOutlook.harvesting_score}</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-6">
+							<div class="text-center">
+								<i class="fas fa-tint fa-2x text-primary mb-2"></i>
+								<div class="fw-bold">Irrigation</div>
+								<span class="badge bg-${getActivityColor(weeklyOutlook.irrigation_priority)} px-3">${weeklyOutlook.irrigation_priority} Priority</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-6">
+							<div class="text-center">
+								<i class="fas fa-virus fa-2x text-danger mb-2"></i>
+								<div class="fw-bold">Disease Risk</div>
+								<span class="badge bg-${getActivityColor(weeklyOutlook.disease_risk)} px-3">${weeklyOutlook.disease_risk}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Summary Recommendations -->
+				<h6 class="fw-bold text-success mb-3">
+					<i class="fas fa-lightbulb me-2"></i>Smart Agricultural Recommendations
+				</h6>
+				<div class="recommendations-container" style="max-height: none;">
+					${summaryRecommendations.map(rec => {
+						// Check if it's a section header
+						if (rec.includes('🚨') || rec.includes('📊') || rec.includes('💧') || rec.includes('📋')) {
+							return `<div class="section-header">${rec}</div>`;
+						}
+						// Check if it's empty line
+						if (rec.trim() === '') {
+							return '<div class="section-spacer"></div>';
+						}
+						// Regular recommendation item
+						return `<div class="recommendation-item ${rec.includes('Alert') || rec.includes('Warning') || rec.includes('CRITICAL') ? 'alert-item' : ''}">${rec}</div>`;
+					}).join('')}
+				</div>
+			</div>
+		</div>
+	`;
+
+	weeklyForecast.appendChild(summaryCard);
+
+	// Display simplified daily forecast
+	data.weather.forecast.daily.slice(0, 7).forEach((day, index) => {
+		const dayCard = document.createElement('div');
+		dayCard.className = 'col-lg-4 col-md-6 mb-3';
+
+		const weatherIcon = getWeatherIcon(day.weather[0].main);
+		const date = new Date(day.dt * 1000);
+		const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
+		const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+		dayCard.innerHTML = `
+			<div class="forecast-card text-center">
+				<div class="p-3">
+					<h6 class="fw-bold mb-1">${dayName}</h6>
+					<small class="text-muted">${dateStr}</small>
+					<div class="my-3">
+						<i class="${weatherIcon} fa-3x"></i>
+					</div>
+					<div class="mb-2">
+						<span class="fw-bold fs-5">${Math.round(day.temp.max)}°</span>
+						<span class="text-muted">/${Math.round(day.temp.min)}°</span>
+					</div>
+					<small class="text-muted">${day.weather[0].description}</small>
+					<div class="mt-2">
+						<small class="text-muted">💧 ${day.humidity}%</small>
+					</div>
+				</div>
+			</div>
+		`;
+
+		weeklyForecast.appendChild(dayCard);
+	});
+	
+	weatherResults.style.display = 'block';
+}
+
+function getWeatherIcon(weatherMain) {
+	const icons = {
+		'Clear': 'fas fa-sun text-warning',
+		'Clouds': 'fas fa-cloud text-secondary',
+		'Rain': 'fas fa-cloud-rain text-primary',
+		'Drizzle': 'fas fa-cloud-drizzle text-info',
+		'Thunderstorm': 'fas fa-bolt text-warning',
+		'Snow': 'fas fa-snowflake text-light',
+		'Mist': 'fas fa-smog text-secondary',
+		'Fog': 'fas fa-smog text-secondary'
+	};
+	return icons[weatherMain] || 'fas fa-cloud text-secondary';
+}
+
+function showError(message) {
+	document.getElementById('errorText').textContent = message;
+	document.getElementById('errorMessage').style.display = 'block';
+}
+
+function handleKeyPress(event) {
+	if (event.key === 'Enter') {
+		getWeatherForecast();
+	}
+}
+
+// Focus on input when page loads
+document.addEventListener('DOMContentLoaded', function() {
+	document.getElementById('cityInput').focus();
+});
+</script>
+
+{% endblock %}

@@ -1,54 +1,242 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %}
 
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+	<div class="container">
+		<h1 data-aos="fade-up">
+			<i class="fas fa-microscope me-3"></i>Plant Disease Detection
+		</h1>
+		<p data-aos="fade-up" data-aos-delay="200">
+			Upload an image of your plant leaf to detect diseases and get treatment recommendations
+		</p>
+	</div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<!-- Upload Form -->
+			<div class="card-modern p-5" data-aos="fade-up" data-aos-delay="200">
+				<div class="text-center mb-4">
+					<div class="feature-icon mb-3">
+						<div class="bg-danger bg-opacity-10 rounded-circle p-4 d-inline-block">
+							<i class="fas fa-leaf text-danger" style="font-size: 3rem;"></i>
+						</div>
+					</div>
+					<h3 class="fw-bold mb-3">Disease Detection AI</h3>
+					<p class="text-muted">
+						Upload a plant leaf image to identify diseases and get treatment recommendations.
+					</p>
+				</div>
+
+				<form method="POST" enctype="multipart/form-data">
+					<div class="mb-4">
+						<label for="file" class="form-label fw-bold">
+							<i class="fas fa-upload me-2"></i>Upload Plant Image
+						</label>
+						<input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+					</div>
+
+					<div class="text-center">
+						<button type="submit" class="btn btn-modern btn-lg px-5">
+							<i class="fas fa-search me-2"></i>Analyze Plant Disease
+						</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- Photography Tips -->
+			<div class="card-modern p-4 mt-4" data-aos="fade-up" data-aos-delay="300">
+				<h5 class="fw-bold mb-3">
+					<i class="fas fa-camera me-2 text-info"></i>Tips for Better Predictions
+				</h5>
+				<div class="row">
+					<div class="col-md-6">
+						<h6 class="fw-semibold text-success">✅ Do This:</h6>
+						<ul class="list-unstyled">
+							<li class="mb-2"><i class="fas fa-check text-success me-2"></i>Take photos in good natural light</li>
+							<li class="mb-2"><i class="fas fa-check text-success me-2"></i>Focus on the affected leaf area</li>
+							<li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fill the frame with the leaf</li>
+							<li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use a clean, contrasting background</li>
+							<li class="mb-2"><i class="fas fa-check text-success me-2"></i>Keep the camera steady</li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<h6 class="fw-semibold text-danger">❌ Avoid This:</h6>
+						<ul class="list-unstyled">
+							<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Blurry or out-of-focus images</li>
+							<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Very dark or poorly lit photos</li>
+							<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Images with multiple leaves</li>
+							<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Photos taken from too far away</li>
+							<li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Images with heavy shadows</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Information Cards -->
+			<div class="row mt-5">
+				<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+					<div class="info-card text-center p-4">
+						<i class="fas fa-brain fa-2x text-primary mb-3"></i>
+						<h5 class="fw-bold">AI-Powered</h5>
+						<p class="text-muted">Advanced deep learning models trained on thousands of plant disease images</p>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+					<div class="info-card text-center p-4">
+						<i class="fas fa-clock fa-2x text-success mb-3"></i>
+						<h5 class="fw-bold">Instant Results</h5>
+						<p class="text-muted">Get disease identification and treatment recommendations in seconds</p>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+					<div class="info-card text-center p-4">
+						<i class="fas fa-shield-alt fa-2x text-warning mb-3"></i>
+						<h5 class="fw-bold">Accurate Detection</h5>
+						<p class="text-muted">High accuracy disease detection for multiple crop types and conditions</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <style>
-  html body {
-    background-color: rgb(206, 206, 228);
-  }
+.upload-area {
+	border: 2px dashed #ddd;
+	border-radius: 15px;
+	padding: 2rem;
+	text-align: center;
+	transition: all 0.3s ease;
+	position: relative;
+	background: #fafafa;
+}
+
+.upload-area:hover {
+	border-color: var(--primary-green);
+	background: #f0f8f0;
+}
+
+.upload-area.dragover {
+	border-color: var(--primary-green);
+	background: #e8f5e8;
+	transform: scale(1.02);
+}
+
+.upload-area input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.upload-preview img {
+	max-height: 300px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.info-card {
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	transition: all 0.3s ease;
+	border: 1px solid #f0f0f0;
+}
+
+.info-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+#loadingIndicator {
+	animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
 </style>
-<br /><br />
-  <h2 style="text-align: center; margin: 0px; color: black">
-    <b>Find out which disease has been caught by your plant</b>
-  </h2>
-  <br />
-  <br>
 
-<div style="
-    width: 350px;
-    height: 50rem;
-    margin: 0px auto;
-    color: black;
-    border-radius: 25px;
-    padding: 10px 10px;
-    font-weight: bold;
-  ">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const fileInput = document.getElementById('file');
+	const uploadArea = document.getElementById('uploadArea');
+	const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+	const uploadPreview = document.getElementById('uploadPreview');
+	const previewImage = document.getElementById('previewImage');
+	const form = document.getElementById('diseaseForm');
+	const submitBtn = document.getElementById('submitBtn');
+	const loadingIndicator = document.getElementById('loadingIndicator');
 
-  
+	// File input change handler
+	fileInput.addEventListener('change', function(e) {
+		handleFileSelect(e.target.files[0]);
+	});
 
+	// Drag and drop handlers
+	uploadArea.addEventListener('dragover', function(e) {
+		e.preventDefault();
+		uploadArea.classList.add('dragover');
+	});
 
-  <form class="form-signin" method=post enctype=multipart/form-data>
+	uploadArea.addEventListener('dragleave', function(e) {
+		e.preventDefault();
+		uploadArea.classList.remove('dragover');
+	});
 
-    <h2 class="h4 mb-3 font-weight-normal"><b>Please Upload The Image</b></h2>
-    <input type="file" name="file" class="form-control-file" id="inputfile" onchange="preview_image(event)" style="font-weight: bold;">
-    <br>
-    <br>
-    <img id="output-image" class="rounded mx-auto d-block" />
-    <button class="btn btn-lg btn-primary btn-block" type="submit" style="font-weight: bold;">Predict</button>
+	uploadArea.addEventListener('drop', function(e) {
+		e.preventDefault();
+		uploadArea.classList.remove('dragover');
+		const files = e.dataTransfer.files;
+		if (files.length > 0) {
+			fileInput.files = files;
+			handleFileSelect(files[0]);
+		}
+	});
 
+	// Form submit handler
+	form.addEventListener('submit', function(e) {
+		if (!fileInput.files[0]) {
+			e.preventDefault();
+			alert('Please select an image file first.');
+			return;
+		}
+		
+		submitBtn.disabled = true;
+		submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+		loadingIndicator.style.display = 'block';
+	});
 
-  </form>
-</div>
+	function handleFileSelect(file) {
+		if (file && file.type.startsWith('image/')) {
+			const reader = new FileReader();
+			reader.onload = function(e) {
+				previewImage.src = e.target.result;
+				uploadPlaceholder.style.display = 'none';
+				uploadPreview.style.display = 'block';
+			};
+			reader.readAsDataURL(file);
+		}
+	}
+});
 
-<script type="text/javascript">
-  function preview_image(event) {
-    var reader = new FileReader();
-    reader.onload = function () {
-      var output = document.getElementById('output-image')
-      output.src = reader.result;
-    }
-    reader.readAsDataURL(event.target.files[0]);
-  }
+function clearImage() {
+	const fileInput = document.getElementById('file');
+	const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+	const uploadPreview = document.getElementById('uploadPreview');
+	
+	fileInput.value = '';
+	uploadPlaceholder.style.display = 'block';
+	uploadPreview.style.display = 'none';
+}
 </script>
 
-</div>
 {% endblock %}

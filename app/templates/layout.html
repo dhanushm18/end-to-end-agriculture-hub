@@ -5,225 +5,911 @@
 	<title>{{ title }}</title>
 	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
 
-	<!-- for-mobile-apps -->
+	<!-- Meta tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<meta name="keywords" content="Agro Harvest Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<meta name="keywords" content="AGRICULTURE HUB, AI Agriculture, Smart Farming, Crop Management, Soil Analysis, Precision Agriculture, Machine Learning Agriculture, Crop Recommendation, Fertilizer Optimization, Plant Disease Detection, Agricultural Technology, Farm Intelligence, Crop Analytics, Soil Health, Agricultural AI, Smart Crop Management" />
+	<meta name="description" content="AGRICULTURE HUB is an AI-powered platform for intelligent crop and soil management. Get smart recommendations for crops, fertilizers, and disease detection using advanced machine learning.">
+
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome 6 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- AOS Animation Library -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 	<style>
+		:root {
+			--primary-green: #2d5a27;
+			--secondary-green: #4a7c59;
+			--accent-green: #7fb069;
+			--light-green: #a7c957;
+			--bg-light: #f8fffe;
+			--text-dark: #2c3e50;
+			--text-light: #6c757d;
+			--gradient-primary: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+			--gradient-secondary: linear-gradient(135deg, #7fb069 0%, #a7c957 100%);
+			--shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+			--shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+			--shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			line-height: 1.6;
+			color: var(--text-dark);
+			background-color: var(--bg-light);
+			overflow-x: hidden;
+		}
+
+		/* Smooth scrolling */
 		html {
+			scroll-behavior: smooth;
+		}
+
+		/* Modern Navbar */
+		.navbar-modern {
+			background: rgba(45, 90, 39, 0.95);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			padding: 1rem 0;
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-modern.scrolled {
+			background: rgba(45, 90, 39, 0.98);
+			box-shadow: var(--shadow-medium);
+		}
+
+		.navbar-brand-modern {
+			font-size: 1.8rem;
+			font-weight: 700;
+			color: white !important;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-brand-modern:hover {
+			transform: scale(1.05);
+		}
+
+		.navbar-brand-modern i {
+			font-size: 2rem;
+			color: var(--light-green);
+		}
+
+		.nav-link-modern {
+			color: rgba(255, 255, 255, 0.9) !important;
+			font-weight: 500;
+			padding: 0.5rem 1rem !important;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			margin: 0 0.2rem;
+			position: relative;
+		}
+
+		.nav-link-modern:hover {
+			background: rgba(255, 255, 255, 0.1);
+			color: white !important;
+			transform: translateY(-2px);
+		}
+
+		.nav-link-modern.active {
+			background: var(--gradient-secondary);
+			color: white !important;
+		}
+
+		/* Custom scrollbar */
+		::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: var(--primary-green);
+			border-radius: 4px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: var(--secondary-green);
+		}
+
+		/* Utility classes */
+		.text-gradient {
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.btn-modern {
+			background: var(--gradient-primary);
+			border: none;
+			color: white;
+			padding: 12px 30px;
+			border-radius: 50px;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			box-shadow: var(--shadow-light);
+		}
+
+		.btn-modern:hover {
+			transform: translateY(-3px);
+			box-shadow: var(--shadow-medium);
+			color: white;
+		}
+
+		.card-modern {
+			background: white;
+			border-radius: 20px;
+			box-shadow: var(--shadow-light);
+			border: none;
+			transition: all 0.3s ease;
+			overflow: hidden;
+		}
+
+		.card-modern:hover {
+			transform: translateY(-10px);
+			box-shadow: var(--shadow-heavy);
+		}
+
+		/* Main content spacing */
+		.main-content {
+			margin-top: 80px;
+			min-height: calc(100vh - 80px);
+		}
+
+		/* Page header styles */
+		.page-header {
+			background: var(--gradient-primary);
+			color: white;
+			padding: 100px 0 60px;
+			text-align: center;
+		}
+
+		.page-header h1 {
+			font-size: 3rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+		}
+
+		.page-header p {
+			font-size: 1.2rem;
+			opacity: 0.9;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		/* Form styles */
+		.form-modern {
+			background: white;
+			border-radius: 20px;
+			box-shadow: var(--shadow-medium);
+			padding: 2rem;
+			margin: 2rem 0;
+		}
+
+		.form-control-modern {
+			border: 2px solid #e9ecef;
+			border-radius: 10px;
+			padding: 12px 16px;
 			font-size: 1rem;
+			transition: all 0.3s ease;
 		}
 
-		@media (min-width: 576px) {
-			html {
-				font-size: 1.25rem;
-			}
+		.form-control-modern:focus {
+			border-color: var(--primary-green);
+			box-shadow: 0 0 0 0.2rem rgba(45, 90, 39, 0.25);
 		}
 
-		@media (min-width: 768px) {
-			html {
-				font-size: 1.5rem;
-			}
+		.form-label-modern {
+			font-weight: 600;
+			color: var(--text-dark);
+			margin-bottom: 0.5rem;
 		}
 
-		@media (min-width: 992px) {
-			html {
-				font-size: 1.75rem;
-			}
-		}
-
-		@media (min-width: 1200px) {
-			html {
-				font-size: 2rem;
-			}
-
-			html {
-				font-size: 1rem;
-			}
-
-			h1 {
-				font-size: 1.2rem;
-			}
-
-			h2 {
-				font-size: 1.1rem;
-			}
-
-			@media (min-width: 768px) {
-				html {
-					font-size: 1.1rem;
-				}
-
-				h1 {
-					font-size: 1.3rem;
-				}
-
-				h2 {
-					font-size: 1.2rem;
-				}
-			}
-
-			@media (min-width: 991px) {
-				html {
-					font-size: 1.2rem;
-				}
-
-				h1 {
-					font-size: 1.5rem;
-				}
-
-				h2 {
-					font-size: 1.4rem;
-				}
-			}
-
-			@media (min-width: 1200px) {
-				html {
-					font-size: 1.2rem;
-				}
-
-				h1 {
-					font-size: 1.7rem;
-				}
-
-				h2 {
-					font-size: 1.6rem;
-				}
-			}
-
+		/* Hover effects */
+		.hover-opacity-100:hover {
+			opacity: 1 !important;
 		}
 	</style>
-	<script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-
-	</script>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	</body>
-	<!-- css files -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
-	<!-- bootstrap css -->
-	<link href="{{ url_for('static', filename='css/style.css') }}" rel='stylesheet' type='text/css' />
-	<!-- custom css -->
-	<link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet"><!-- fontawesome css -->
-	<!-- //css files -->
-	<!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png?') }}"> -->
-
-
+	<!-- JavaScript Libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script type="text/JavaScript" src="{{ url_for('static', filename='scripts/cities.js') }}"></script>
-
-
-	<!-- google fonts -->
-	<link href="//fonts.googleapis.com/css?family=Thasadith:400,400i,700,700i&amp;subset=latin-ext,thai,vietnamese"
-		rel="stylesheet">
-	<!-- //google fonts -->
-
-	<style>
-		header {
-			background-color: rgba(30, 30, 30, 1);
-			margin-top: 0rem;
-			display: block;
-
-		}
-	</style>
 </head>
 
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" style="background-color: #1C00ff00;">
+	<!-- Modern Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-modern" id="mainNavbar">
 		<div class="container">
-			<a class="navbar-brand" href="{{ url_for('home') }}">
-				<img src="{{ url_for('static', filename='images/logo.jpg') }}" style="width: 90px; height: 55px" alt="">
+			<a class="navbar-brand-modern" href="{{ url_for('home') }}">
+				<i class="fas fa-seedling"></i>
+				AGRICULTURE HUB
 			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ url_for('home') }}">Home
-							<span class="sr-only">(current)</span>
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a href="{{ url_for('home') }}" class="nav-link-modern" id="home-link">
+							<i class="fas fa-home me-1"></i>Home
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('crop_recommend') }}">Crop</a>
+						<a href="{{ url_for('crop_recommend') }}" class="nav-link-modern" id="crop-link">
+							<i class="fas fa-wheat-awn me-1"></i>Smart Crop
+						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('fertilizer_recommendation') }}">Fertilizer</a>
+						<a href="{{ url_for('fertilizer_recommendation') }}" class="nav-link-modern" id="fertilizer-link">
+							<i class="fas fa-flask me-1"></i>Soil Optimizer
+						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('disease_prediction') }}">Disease</a>
+						<a href="{{ url_for('disease_prediction') }}" class="nav-link-modern" id="disease-link">
+							<i class="fas fa-microscope me-1"></i>Disease AI
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="{{ url_for('weather_recommendations') }}" class="nav-link-modern" id="weather-link">
+							<i class="fas fa-cloud-sun me-1"></i>Weather Insights
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ url_for('crop_comparison') }}" class="nav-link-modern" id="comparison-link">
+							<i class="fas fa-chart-line me-1"></i>Crop Compare
+						</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
+	<!-- Main Content -->
+	<div class="main-content">
+		{% block body %} {% endblock %}
+	</div>
 
+	<!-- Modern Footer -->
+	<footer class="bg-dark text-light py-5 mt-5">
+		<div class="container">
+			<div class="row g-4">
+				<!-- Brand Section -->
+				<div class="col-lg-4 col-md-6">
+					<div class="d-flex align-items-center mb-3">
+						<i class="fas fa-seedling text-success me-2" style="font-size: 2rem;"></i>
+						<h3 class="text-success mb-0 fw-bold">AGRI HUB</h3>
+					</div>
+					<p class="text-light opacity-75 mb-4">
+						Empowering farmers worldwide with AI-driven agricultural solutions. 
+						Transform your farming practices with intelligent crop recommendations, 
+						soil optimization, and disease detection technology.
+					</p>
+					<div class="d-flex gap-3">
+						<a href="#" class="text-light opacity-75 fs-4 hover-opacity-100 text-decoration-none">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#" class="text-light opacity-75 fs-4 hover-opacity-100 text-decoration-none">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="#" class="text-light opacity-75 fs-4 hover-opacity-100 text-decoration-none">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+						<a href="#" class="text-light opacity-75 fs-4 hover-opacity-100 text-decoration-none">
+							<i class="fab fa-instagram"></i>
+						</a>
+					</div>
+				</div>
 
+				<!-- Quick Links -->
+				<div class="col-lg-2 col-md-6">
+					<h5 class="text-success mb-3 fw-semibold">Quick Links</h5>
+					<ul class="list-unstyled">
+						<li class="mb-2">
+							<a href="{{ url_for('home') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-home me-2"></i>Home
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="#features" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-info-circle me-2"></i>About Us
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="#" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-phone me-2"></i>Contact
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="#" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-question-circle me-2"></i>FAQ
+							</a>
+						</li>
+					</ul>
+				</div>
 
-	{% block body %} {% endblock %}
+				<!-- Our Services -->
+				<div class="col-lg-3 col-md-6">
+					<h5 class="text-success mb-3 fw-semibold">Our Services</h5>
+					<ul class="list-unstyled">
+						<li class="mb-2">
+							<a href="{{ url_for('crop_recommend') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-wheat-awn me-2"></i>Smart Crop Recommendation
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="{{ url_for('fertilizer_recommendation') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-flask me-2"></i>Soil Optimization
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="{{ url_for('disease_prediction') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-microscope me-2"></i>Disease Detection AI
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="{{ url_for('chatbot') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-robot me-2"></i>AI Agriculture Assistant
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="{{ url_for('weather_recommendations') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-cloud-sun me-2"></i>Weather Insights
+							</a>
+						</li>
+						<li class="mb-2">
+							<a href="{{ url_for('crop_comparison') }}" class="text-light opacity-75 text-decoration-none hover-opacity-100">
+								<i class="fas fa-chart-line me-2"></i>Crop Comparison Dashboard
+							</a>
+						</li>
+					</ul>
+				</div>
 
-	<!-- footer -->
-	<footer class="text-center py-5">
-		<div class="container py-md-3">
-			<!-- logo -->
-			<h2 class="logo2 text-center">
-				<a href="{{ url_for('home') }}">
-					Harvestify
-				</a>
-			</h2>
-			<!-- //logo -->
-			<!-- address -->
-			<div class="contact-left-footer mt-4">
-
-
-
-
-
-				<!-- <a href="community.html">Community</a> -->
-				</p>
+				<!-- Contact Info -->
+				<div class="col-lg-3 col-md-6">
+					<h5 class="text-success mb-3 fw-semibold">Get In Touch</h5>
+					<ul class="list-unstyled">
+						<li class="mb-2 text-light opacity-75">
+							<i class="fas fa-envelope me-2"></i>
+							<a href="mailto:info@agrihub.com" class="text-light opacity-75 text-decoration-none">
+								info@agrihub.com
+							</a>
+						</li>
+						<li class="mb-2 text-light opacity-75">
+							<i class="fas fa-phone me-2"></i>
+							<a href="tel:+918722481835" class="text-light opacity-75 text-decoration-none">
+								+91 8722481835
+							</a>
+						</li>
+						<li class="mb-2 text-light opacity-75">
+							<i class="fas fa-map-marker-alt me-2"></i>
+							PES College Of Engineering,Mandya<br>
+							<span class="ms-4">Karnataka, Mandya</span>
+						</li>
+						<li class="mb-2 text-light opacity-75">
+							<i class="fas fa-clock me-2"></i>
+							24/7 AI Support Available
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="w3l-copy text-center">
-				<p class="text-da">An Environmental Intelligence Startup<br> </p>
-			</div>
-			<p class="homelogo">
-			<p>Made with ❤️ by Atharva</p>
-			<p>&copy; Copyright 2021 Atharva Ingle</p>
+
+			<hr class="my-4 opacity-25">
 			
+			<!-- Bottom Footer -->
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<p class="mb-0 text-light opacity-75">
+						&copy; 2025 AGRICULTURE HUB. All rights reserved. | 
+						<a href="#" class="text-success text-decoration-none">Privacy Policy</a> | 
+						<a href="#" class="text-success text-decoration-none">Terms of Service</a>
+					</p>
+				</div>
+				<div class="col-md-6 text-md-end">
+					<p class="mb-0 text-light opacity-75">
+						Made with <i class="fas fa-heart text-danger"></i> for sustainable agriculture
+					</p>
+				</div>
+			</div>
 		</div>
 	</footer>
-	<!-- //footer -->
 
-	<!-- move top icon -->
-	<a href="#home" class="move-top text-center"></a>
-	<!-- //move top icon -->
+	<!-- JavaScript for animations and interactions -->
+	<script>
+		// Initialize AOS animations
+		AOS.init({
+			duration: 1000,
+			once: true
+		});
+
+		// Navbar scroll effect
+		window.addEventListener('scroll', function() {
+			const navbar = document.getElementById('mainNavbar');
+			if (window.scrollY > 50) {
+				navbar.classList.add('scrolled');
+			} else {
+				navbar.classList.remove('scrolled');
+			}
+		});
+
+		// Set active nav link
+		const currentPath = window.location.pathname;
+		const navLinks = document.querySelectorAll('.nav-link-modern');
+		navLinks.forEach(link => {
+			link.classList.remove('active');
+			if (link.getAttribute('href') === currentPath) {
+				link.classList.add('active');
+			}
+		});
+	</script>
+
+	<!-- Floating Chatbot Widget -->
+	<div id="chatbot-widget" class="chatbot-widget">
+		<!-- Chatbot Toggle Button -->
+		<div id="chatbot-toggle" class="chatbot-toggle">
+			<i class="fas fa-robot"></i>
+			<span class="chatbot-badge" id="chatbot-badge">AI</span>
+		</div>
+
+		<!-- Chatbot Window -->
+		<div id="chatbot-window" class="chatbot-window">
+			<div class="chatbot-header">
+				<div class="chatbot-title">
+					<i class="fas fa-leaf me-2"></i>AGRI BOT
+				</div>
+				<div class="chatbot-subtitle">Your AI Agriculture Assistant</div>
+				<button id="chatbot-close" class="chatbot-close">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+
+			<div class="chatbot-messages" id="chatbot-messages">
+				<div class="message bot-message">
+					<div class="message-avatar">
+						<i class="fas fa-robot"></i>
+					</div>
+					<div class="message-content">
+						<div class="message-text">
+							👋 Hello! I'm AGRI BOT, your AI agriculture assistant. I can help you with:
+							<br><br>
+							🌱 Crop recommendations<br>
+							🌿 Plant disease identification<br>
+							🌧️ Weather-based farming advice<br>
+							💧 Irrigation guidance<br>
+							🌾 Soil management tips<br>
+							<br>
+							How can I assist you today?
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="chatbot-input">
+				<div class="input-group">
+					<input type="text" id="chatbot-input" class="form-control" placeholder="Ask me about farming, crops, diseases..." maxlength="500">
+					<button id="chatbot-send" class="btn btn-primary">
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+				<div class="chatbot-typing" id="chatbot-typing" style="display: none;">
+					<div class="typing-indicator">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<span class="typing-text">AGRI BOT is typing...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+	/* Floating Chatbot Styles */
+	.chatbot-widget {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		z-index: 1000;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.chatbot-toggle {
+		width: 60px;
+		height: 60px;
+		background: linear-gradient(135deg, #4a7c59, #7fb069);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		box-shadow: 0 4px 20px rgba(74, 124, 89, 0.3);
+		transition: all 0.3s ease;
+		position: relative;
+		animation: pulse 2s infinite;
+	}
+
+	.chatbot-toggle:hover {
+		transform: scale(1.1);
+		box-shadow: 0 6px 25px rgba(74, 124, 89, 0.4);
+	}
+
+	.chatbot-toggle i {
+		color: white;
+		font-size: 24px;
+	}
+
+	.chatbot-badge {
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		background: #ff4757;
+		color: white;
+		border-radius: 10px;
+		padding: 2px 6px;
+		font-size: 10px;
+		font-weight: bold;
+		animation: bounce 1s infinite;
+	}
+
+	.chatbot-window {
+		position: absolute;
+		bottom: 80px;
+		right: 0;
+		width: 350px;
+		height: 500px;
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+		display: none;
+		flex-direction: column;
+		overflow: hidden;
+		border: 1px solid #e9ecef;
+	}
+
+	.chatbot-header {
+		background: linear-gradient(135deg, #4a7c59, #7fb069);
+		color: white;
+		padding: 20px;
+		position: relative;
+	}
+
+	.chatbot-title {
+		font-size: 18px;
+		font-weight: 700;
+		margin-bottom: 5px;
+	}
+
+	.chatbot-subtitle {
+		font-size: 12px;
+		opacity: 0.9;
+	}
+
+	.chatbot-close {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: none;
+		border: none;
+		color: white;
+		font-size: 16px;
+		cursor: pointer;
+		padding: 5px;
+		border-radius: 50%;
+		transition: background 0.3s ease;
+	}
+
+	.chatbot-close:hover {
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	.chatbot-messages {
+		flex: 1;
+		padding: 20px;
+		overflow-y: auto;
+		background: #f8f9fa;
+	}
+
+	.message {
+		display: flex;
+		margin-bottom: 15px;
+		animation: fadeInUp 0.3s ease;
+	}
+
+	.message-avatar {
+		width: 35px;
+		height: 35px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 10px;
+		flex-shrink: 0;
+	}
+
+	.bot-message .message-avatar {
+		background: linear-gradient(135deg, #4a7c59, #7fb069);
+		color: white;
+	}
+
+	.user-message {
+		flex-direction: row-reverse;
+	}
+
+	.user-message .message-avatar {
+		background: #007bff;
+		color: white;
+		margin-right: 0;
+		margin-left: 10px;
+	}
+
+	.message-content {
+		flex: 1;
+		max-width: 80%;
+	}
+
+	.message-text {
+		background: white;
+		padding: 12px 15px;
+		border-radius: 18px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		line-height: 1.4;
+		font-size: 14px;
+	}
+
+	.user-message .message-text {
+		background: #007bff;
+		color: white;
+	}
+
+	.chatbot-input {
+		padding: 20px;
+		background: white;
+		border-top: 1px solid #e9ecef;
+	}
+
+	.chatbot-input .input-group {
+		display: flex;
+		gap: 10px;
+	}
+
+	.chatbot-input .form-control {
+		flex: 1;
+		border: 2px solid #e9ecef;
+		border-radius: 25px;
+		padding: 12px 18px;
+		font-size: 14px;
+		outline: none;
+		transition: border-color 0.3s ease;
+	}
+
+	.chatbot-input .form-control:focus {
+		border-color: #4a7c59;
+		box-shadow: none;
+	}
+
+	.chatbot-input .btn {
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #4a7c59, #7fb069);
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+	}
+
+	.chatbot-input .btn:hover {
+		transform: scale(1.05);
+		box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+	}
+
+	.chatbot-typing {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 10px;
+		color: #6c757d;
+		font-size: 12px;
+	}
+
+	.typing-indicator {
+		display: flex;
+		gap: 3px;
+	}
+
+	.typing-indicator span {
+		width: 6px;
+		height: 6px;
+		background: #6c757d;
+		border-radius: 50%;
+		animation: typing 1.4s infinite ease-in-out;
+	}
+
+	.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+	.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+	/* Animations */
+	@keyframes pulse {
+		0% { box-shadow: 0 4px 20px rgba(74, 124, 89, 0.3); }
+		50% { box-shadow: 0 4px 20px rgba(74, 124, 89, 0.5); }
+		100% { box-shadow: 0 4px 20px rgba(74, 124, 89, 0.3); }
+	}
+
+	@keyframes bounce {
+		0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+		40% { transform: translateY(-5px); }
+		60% { transform: translateY(-3px); }
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes typing {
+		0%, 80%, 100% { transform: scale(0); }
+		40% { transform: scale(1); }
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.chatbot-window {
+			width: 300px;
+			height: 450px;
+		}
+
+		.chatbot-widget {
+			bottom: 15px;
+			right: 15px;
+		}
+	}
+	</style>
+
+	<script>
+	// Chatbot functionality
+	document.addEventListener('DOMContentLoaded', function() {
+		const chatbotToggle = document.getElementById('chatbot-toggle');
+		const chatbotWindow = document.getElementById('chatbot-window');
+		const chatbotClose = document.getElementById('chatbot-close');
+		const chatbotInput = document.getElementById('chatbot-input');
+		const chatbotSend = document.getElementById('chatbot-send');
+		const chatbotMessages = document.getElementById('chatbot-messages');
+		const chatbotTyping = document.getElementById('chatbot-typing');
+		const chatbotBadge = document.getElementById('chatbot-badge');
+
+		let isOpen = false;
+
+		// Toggle chatbot window
+		chatbotToggle.addEventListener('click', function() {
+			if (isOpen) {
+				chatbotWindow.style.display = 'none';
+				isOpen = false;
+			} else {
+				chatbotWindow.style.display = 'flex';
+				isOpen = true;
+				chatbotInput.focus();
+				chatbotBadge.style.display = 'none';
+			}
+		});
+
+		// Close chatbot
+		chatbotClose.addEventListener('click', function() {
+			chatbotWindow.style.display = 'none';
+			isOpen = false;
+		});
+
+		// Send message on Enter key
+		chatbotInput.addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') {
+				sendMessage();
+			}
+		});
+
+		// Send message on button click
+		chatbotSend.addEventListener('click', sendMessage);
+
+		function sendMessage() {
+			const message = chatbotInput.value.trim();
+			if (!message) return;
+
+			// Add user message
+			addMessage(message, 'user');
+			chatbotInput.value = '';
+
+			// Show typing indicator
+			showTyping();
+
+			// Send to API
+			fetch('/chatbot-api', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ message: message })
+			})
+			.then(response => response.json())
+			.then(data => {
+				hideTyping();
+				addMessage(data.response, 'bot');
+			})
+			.catch(error => {
+				hideTyping();
+				addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+				console.error('Chatbot error:', error);
+			});
+		}
+
+		function addMessage(text, sender) {
+			const messageDiv = document.createElement('div');
+			messageDiv.className = `message ${sender}-message`;
+
+			const avatar = document.createElement('div');
+			avatar.className = 'message-avatar';
+			avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+
+			const content = document.createElement('div');
+			content.className = 'message-content';
+
+			const messageText = document.createElement('div');
+			messageText.className = 'message-text';
+			messageText.innerHTML = text.replace(/\n/g, '<br>');
+
+			content.appendChild(messageText);
+			messageDiv.appendChild(avatar);
+			messageDiv.appendChild(content);
+
+			chatbotMessages.appendChild(messageDiv);
+			chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+		}
+
+		function showTyping() {
+			chatbotTyping.style.display = 'flex';
+		}
+
+		function hideTyping() {
+			chatbotTyping.style.display = 'none';
+		}
+
+		// Show notification badge periodically
+		setInterval(function() {
+			if (!isOpen) {
+				chatbotBadge.style.display = 'block';
+			}
+		}, 30000); // Show every 30 seconds when closed
+	});
+	</script>
 </body>
 
 </html>

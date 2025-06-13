@@ -1,0 +1,1063 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+	<div class="container">
+		<h1 data-aos="fade-up">
+			<i class="fas fa-chart-line me-3"></i>Crop Comparison Dashboard
+		</h1>
+		<p data-aos="fade-up" data-aos-delay="200">
+			Compare crops with detailed profit analysis, ROI calculations, and comprehensive agricultural data to make informed farming decisions
+		</p>
+	</div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<div class="row">
+		<!-- Sidebar - Crop Selection -->
+		<div class="col-lg-3">
+			<div class="card-modern sticky-top" style="top: 100px;">
+				<div class="p-4">
+					<h5 class="fw-bold mb-3">
+						<i class="fas fa-seedling me-2 text-success"></i>Select Crops to Compare
+					</h5>
+					
+					<!-- Crop Categories -->
+					<div class="crop-categories mb-4">
+						<div class="category-section mb-3">
+							<h6 class="fw-semibold text-primary mb-2">Cereals</h6>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="rice" id="crop-rice">
+								<label class="form-check-label" for="crop-rice">Rice</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="wheat" id="crop-wheat">
+								<label class="form-check-label" for="crop-wheat">Wheat</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="maize" id="crop-maize">
+								<label class="form-check-label" for="crop-maize">Maize</label>
+							</div>
+						</div>
+						
+						<div class="category-section mb-3">
+							<h6 class="fw-semibold text-warning mb-2">Cash Crops</h6>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="sugarcane" id="crop-sugarcane">
+								<label class="form-check-label" for="crop-sugarcane">Sugarcane</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="cotton" id="crop-cotton">
+								<label class="form-check-label" for="crop-cotton">Cotton</label>
+							</div>
+						</div>
+						
+						<div class="category-section mb-3">
+							<h6 class="fw-semibold text-success mb-2">Vegetables</h6>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="tomato" id="crop-tomato">
+								<label class="form-check-label" for="crop-tomato">Tomato</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="potato" id="crop-potato">
+								<label class="form-check-label" for="crop-potato">Potato</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="onion" id="crop-onion">
+								<label class="form-check-label" for="crop-onion">Onion</label>
+							</div>
+						</div>
+						
+						<div class="category-section mb-3">
+							<h6 class="fw-semibold text-info mb-2">Fruits</h6>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="banana" id="crop-banana">
+								<label class="form-check-label" for="crop-banana">Banana</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="mango" id="crop-mango">
+								<label class="form-check-label" for="crop-mango">Mango</label>
+							</div>
+						</div>
+					</div>
+					
+					<button class="btn btn-modern w-100" onclick="compareCrops()">
+						<i class="fas fa-chart-bar me-2"></i>Compare Selected Crops
+					</button>
+					
+					<button class="btn btn-outline-secondary w-100 mt-2" onclick="clearSelection()">
+						<i class="fas fa-times me-2"></i>Clear Selection
+					</button>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Main Content Area -->
+		<div class="col-lg-9">
+			<!-- Loading Indicator -->
+			<div class="text-center mb-4" id="loadingIndicator" style="display: none;">
+				<div class="spinner-border text-primary" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<p class="mt-2 text-muted">Analyzing crop data and generating comparisons...</p>
+			</div>
+			
+			<!-- Welcome Message -->
+			<div class="card-modern text-center p-5" id="welcomeMessage">
+				<i class="fas fa-chart-line fa-4x text-primary mb-3"></i>
+				<h3 class="fw-bold mb-3">Welcome to Crop Comparison Dashboard</h3>
+				<p class="text-muted mb-4">
+					Select crops from the sidebar to compare their profitability, resource requirements, 
+					and market potential. Get detailed insights to make informed farming decisions.
+				</p>
+				<div class="row text-center">
+					<div class="col-md-3">
+						<i class="fas fa-dollar-sign fa-2x text-success mb-2"></i>
+						<h6>Profit Analysis</h6>
+					</div>
+					<div class="col-md-3">
+						<i class="fas fa-percentage fa-2x text-warning mb-2"></i>
+						<h6>ROI Calculation</h6>
+					</div>
+					<div class="col-md-3">
+						<i class="fas fa-tint fa-2x text-info mb-2"></i>
+						<h6>Resource Requirements</h6>
+					</div>
+					<div class="col-md-3">
+						<i class="fas fa-clock fa-2x text-primary mb-2"></i>
+						<h6>Growing Period</h6>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Comparison Results -->
+			<div id="comparisonResults" style="display: none;">
+				<!-- Summary Cards -->
+				<div class="row mb-4" id="summaryCards">
+					<!-- Summary cards will be populated here -->
+				</div>
+
+				<!-- Interactive Dashboard -->
+				<div class="row mb-4">
+					<!-- Main Chart Area -->
+					<div class="col-lg-8 mb-4">
+						<div class="card-modern p-4">
+							<div class="d-flex justify-content-between align-items-center mb-3">
+								<h5 class="fw-bold mb-0">
+									<i class="fas fa-chart-line me-2 text-primary"></i>Interactive Analysis
+								</h5>
+								<div class="btn-group" role="group">
+									<input type="radio" class="btn-check" name="chartType" id="profitView" value="profit" checked>
+									<label class="btn btn-outline-primary btn-sm" for="profitView">Profit</label>
+
+									<input type="radio" class="btn-check" name="chartType" id="roiView" value="roi">
+									<label class="btn btn-outline-warning btn-sm" for="roiView">ROI</label>
+
+									<input type="radio" class="btn-check" name="chartType" id="resourceView" value="resource">
+									<label class="btn btn-outline-info btn-sm" for="resourceView">Resources</label>
+
+									<input type="radio" class="btn-check" name="chartType" id="costView" value="cost">
+									<label class="btn btn-outline-success btn-sm" for="costView">Costs</label>
+								</div>
+							</div>
+							<div class="chart-container">
+								<canvas id="mainChart" height="300"></canvas>
+							</div>
+						</div>
+					</div>
+
+					<!-- Quick Stats -->
+					<div class="col-lg-4 mb-4">
+						<div class="card-modern p-4 h-100">
+							<h6 class="fw-bold mb-3">
+								<i class="fas fa-trophy me-2 text-warning"></i>Top Performers
+							</h6>
+							<div id="topPerformers">
+								<!-- Top performers will be populated here -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Compact Comparison Table -->
+				<div class="card-modern p-4 mb-4">
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<h5 class="fw-bold mb-0">
+							<i class="fas fa-table me-2 text-secondary"></i>Comparison Overview
+						</h5>
+						<button class="btn btn-outline-secondary btn-sm" onclick="toggleDetailedView()">
+							<i class="fas fa-expand-arrows-alt me-1"></i>
+							<span id="toggleText">Show Details</span>
+						</button>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-hover table-sm" id="comparisonTable">
+							<thead class="table-dark">
+								<tr>
+									<th>Crop</th>
+									<th>Profit (₹)</th>
+									<th>ROI (%)</th>
+									<th>Period (days)</th>
+									<th>Water (mm)</th>
+									<th>Labor (days)</th>
+									<th>Demand</th>
+									<th class="detailed-col" style="display: none;">Total Cost</th>
+									<th class="detailed-col" style="display: none;">Revenue</th>
+									<th class="detailed-col" style="display: none;">Category</th>
+								</tr>
+							</thead>
+							<tbody id="comparisonTableBody">
+								<!-- Table rows will be populated here -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Expandable Detailed Information -->
+				<div class="card-modern p-4">
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<h5 class="fw-bold mb-0">
+							<i class="fas fa-info-circle me-2 text-info"></i>Detailed Crop Analysis
+						</h5>
+						<button class="btn btn-outline-info btn-sm" onclick="toggleCropDetails()">
+							<i class="fas fa-chevron-down me-1" id="detailsIcon"></i>
+							<span id="detailsToggleText">Show Details</span>
+						</button>
+					</div>
+					<div id="detailedCropInfo" style="display: none;">
+						<!-- Detailed crop cards will be populated here -->
+					</div>
+				</div>
+			</div>
+			
+			<!-- Error Message -->
+			<div class="alert alert-danger" id="errorMessage" style="display: none;">
+				<i class="fas fa-exclamation-triangle me-2"></i>
+				<span id="errorText"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.sticky-top {
+	position: sticky;
+	top: 100px;
+	z-index: 1020;
+}
+
+.category-section {
+	border-left: 3px solid #e9ecef;
+	padding-left: 1rem;
+}
+
+.form-check {
+	margin-bottom: 0.5rem;
+}
+
+.form-check-input:checked {
+	background-color: var(--primary-green);
+	border-color: var(--primary-green);
+}
+
+.comparison-card {
+	background: white;
+	border-radius: 15px;
+	padding: 1.5rem;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	border-left: 4px solid #007bff;
+	transition: all 0.3s ease;
+}
+
+.comparison-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.profit-positive {
+	color: #28a745;
+	font-weight: bold;
+}
+
+.profit-negative {
+	color: #dc3545;
+	font-weight: bold;
+}
+
+.roi-excellent {
+	background: linear-gradient(135deg, #28a745, #20c997);
+	color: white;
+}
+
+.roi-good {
+	background: linear-gradient(135deg, #ffc107, #fd7e14);
+	color: white;
+}
+
+.roi-poor {
+	background: linear-gradient(135deg, #dc3545, #e83e8c);
+	color: white;
+}
+
+.crop-detail-card {
+	background: white;
+	border-radius: 15px;
+	padding: 2rem;
+	margin-bottom: 2rem;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	border-top: 4px solid #007bff;
+}
+
+.metric-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.75rem 0;
+	border-bottom: 1px solid #f8f9fa;
+}
+
+.metric-item:last-child {
+	border-bottom: none;
+}
+
+.metric-label {
+	font-weight: 600;
+	color: #495057;
+}
+
+.metric-value {
+	font-weight: bold;
+	color: #007bff;
+}
+
+.chart-container {
+	position: relative;
+	height: 350px;
+	margin: 1rem 0;
+}
+
+.btn-check:checked + .btn {
+	background: var(--gradient-primary);
+	border-color: var(--primary-green);
+	color: white;
+}
+
+.top-performer-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.75rem;
+	margin-bottom: 0.5rem;
+	background: #f8f9fa;
+	border-radius: 8px;
+	border-left: 4px solid #007bff;
+}
+
+.top-performer-rank {
+	background: linear-gradient(135deg, #ffd700, #ffed4e);
+	color: #333;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 0.9rem;
+}
+
+.top-performer-rank.rank-1 {
+	background: linear-gradient(135deg, #ffd700, #ffed4e);
+}
+
+.top-performer-rank.rank-2 {
+	background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+}
+
+.top-performer-rank.rank-3 {
+	background: linear-gradient(135deg, #cd7f32, #daa520);
+}
+
+.compact-table {
+	font-size: 0.9rem;
+}
+
+.compact-table th {
+	padding: 0.5rem;
+	font-weight: 600;
+}
+
+.compact-table td {
+	padding: 0.5rem;
+}
+
+.detailed-view-active .detailed-col {
+	display: table-cell !important;
+}
+
+.crop-detail-compact {
+	background: white;
+	border-radius: 10px;
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	border-left: 4px solid #007bff;
+}
+
+.metric-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+.metric-card {
+	background: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	text-align: center;
+	border: 1px solid #e9ecef;
+}
+
+.metric-card h6 {
+	color: #6c757d;
+	font-size: 0.8rem;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.metric-card .value {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #007bff;
+}
+
+.interactive-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-top: 1rem;
+	padding: 1rem;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.legend-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.legend-color {
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+}
+
+.chart-loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+	color: #6c757d;
+}
+
+.performance-indicator {
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	border-radius: 12px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.performance-excellent {
+	background: #d4edda;
+	color: #155724;
+}
+
+.performance-good {
+	background: #fff3cd;
+	color: #856404;
+}
+
+.performance-poor {
+	background: #f8d7da;
+	color: #721c24;
+}
+</style>
+
+<script>
+let selectedCrops = [];
+let cropData = {};
+let charts = {};
+
+// Load crop data on page load
+document.addEventListener('DOMContentLoaded', function() {
+	loadCropData();
+});
+
+function loadCropData() {
+	fetch('/crop-data-api')
+	.then(response => response.json())
+	.then(data => {
+		if (data.success) {
+			cropData = data;
+		} else {
+			showError('Failed to load crop data');
+		}
+	})
+	.catch(error => {
+		showError('Network error while loading crop data');
+		console.error('Error:', error);
+	});
+}
+
+function compareCrops() {
+	// Get selected crops
+	selectedCrops = [];
+	document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+		selectedCrops.push(checkbox.value);
+	});
+	
+	if (selectedCrops.length === 0) {
+		showError('Please select at least one crop to compare');
+		return;
+	}
+	
+	// Show loading
+	document.getElementById('loadingIndicator').style.display = 'block';
+	document.getElementById('welcomeMessage').style.display = 'none';
+	document.getElementById('comparisonResults').style.display = 'none';
+	document.getElementById('errorMessage').style.display = 'none';
+	
+	// Fetch comparison data
+	fetch('/crop-compare-api', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ crops: selectedCrops })
+	})
+	.then(response => response.json())
+	.then(data => {
+		document.getElementById('loadingIndicator').style.display = 'none';
+		
+		if (data.success) {
+			displayComparisonResults(data);
+		} else {
+			showError(data.error || 'Failed to compare crops');
+		}
+	})
+	.catch(error => {
+		document.getElementById('loadingIndicator').style.display = 'none';
+		showError('Network error during comparison');
+		console.error('Error:', error);
+	});
+}
+
+function clearSelection() {
+	document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+		checkbox.checked = false;
+	});
+	selectedCrops = [];
+	document.getElementById('welcomeMessage').style.display = 'block';
+	document.getElementById('comparisonResults').style.display = 'none';
+	document.getElementById('errorMessage').style.display = 'none';
+	
+	// Destroy existing charts
+	Object.values(charts).forEach(chart => {
+		if (chart) chart.destroy();
+	});
+	charts = {};
+}
+
+function displayComparisonResults(data) {
+	const comparison = data.comparison;
+
+	// Display summary cards
+	displaySummaryCards(comparison);
+
+	// Create interactive main chart
+	createMainChart(comparison);
+
+	// Display top performers
+	displayTopPerformers(comparison);
+
+	// Display compact comparison table
+	displayCompactTable(comparison);
+
+	// Display detailed crop information (collapsed by default)
+	displayDetailedCropInfo(comparison);
+
+	// Set up chart type switching
+	setupChartSwitching(comparison);
+
+	// Show results
+	document.getElementById('comparisonResults').style.display = 'block';
+}
+
+function displaySummaryCards(comparison) {
+	const summaryCards = document.getElementById('summaryCards');
+	summaryCards.innerHTML = '';
+	
+	// Calculate summary statistics
+	const crops = Object.values(comparison);
+	const totalCrops = crops.length;
+	const avgROI = crops.reduce((sum, crop) => sum + crop.roi, 0) / totalCrops;
+	const maxProfit = Math.max(...crops.map(crop => crop.profit));
+	const bestROICrop = crops.reduce((best, crop) => crop.roi > best.roi ? crop : best);
+	
+	const summaryData = [
+		{
+			title: 'Crops Compared',
+			value: totalCrops,
+			icon: 'fas fa-seedling',
+			color: 'primary'
+		},
+		{
+			title: 'Average ROI',
+			value: avgROI.toFixed(1) + '%',
+			icon: 'fas fa-percentage',
+			color: 'success'
+		},
+		{
+			title: 'Max Profit',
+			value: '₹' + maxProfit.toLocaleString(),
+			icon: 'fas fa-rupee-sign',
+			color: 'warning'
+		},
+		{
+			title: 'Best ROI Crop',
+			value: bestROICrop.name,
+			icon: 'fas fa-trophy',
+			color: 'info'
+		}
+	];
+	
+	summaryData.forEach(item => {
+		const card = document.createElement('div');
+		card.className = 'col-lg-3 col-md-6 mb-3';
+		card.innerHTML = `
+			<div class="comparison-card text-center">
+				<i class="${item.icon} fa-2x text-${item.color} mb-2"></i>
+				<h6 class="fw-bold">${item.title}</h6>
+				<h4 class="text-${item.color} mb-0">${item.value}</h4>
+			</div>
+		`;
+		summaryCards.appendChild(card);
+	});
+}
+
+function createMainChart(comparison) {
+	const ctx = document.getElementById('mainChart').getContext('2d');
+	if (charts.main) charts.main.destroy();
+
+	// Start with profit view
+	updateMainChart(comparison, 'profit');
+}
+
+function updateMainChart(comparison, chartType) {
+	const ctx = document.getElementById('mainChart').getContext('2d');
+	if (charts.main) charts.main.destroy();
+
+	const labels = Object.values(comparison).map(crop => crop.name);
+	let datasets = [];
+	let chartConfig = {};
+
+	switch(chartType) {
+		case 'profit':
+			const profits = Object.values(comparison).map(crop => crop.profit);
+			datasets = [{
+				label: 'Profit (₹/hectare)',
+				data: profits,
+				backgroundColor: profits.map(profit => profit >= 0 ? '#28a745' : '#dc3545'),
+				borderColor: profits.map(profit => profit >= 0 ? '#1e7e34' : '#c82333'),
+				borderWidth: 2,
+				borderRadius: 8
+			}];
+			chartConfig = {
+				type: 'bar',
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return '₹' + value.toLocaleString();
+								}
+							}
+						}
+					}
+				}
+			};
+			break;
+
+		case 'roi':
+			const rois = Object.values(comparison).map(crop => crop.roi);
+			datasets = [{
+				label: 'ROI (%)',
+				data: rois,
+				backgroundColor: rois.map(roi => {
+					if (roi >= 50) return '#28a745';
+					if (roi >= 20) return '#ffc107';
+					if (roi >= 0) return '#fd7e14';
+					return '#dc3545';
+				}),
+				borderColor: rois.map(roi => {
+					if (roi >= 50) return '#1e7e34';
+					if (roi >= 20) return '#e0a800';
+					if (roi >= 0) return '#e8590c';
+					return '#c82333';
+				}),
+				borderWidth: 2,
+				borderRadius: 8
+			}];
+			chartConfig = {
+				type: 'bar',
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return value + '%';
+								}
+							}
+						}
+					}
+				}
+			};
+			break;
+
+		case 'resource':
+			const water = Object.values(comparison).map(crop => crop.water_requirement);
+			const labor = Object.values(comparison).map(crop => crop.labor_requirement);
+			datasets = [
+				{
+					label: 'Water Requirement (mm)',
+					data: water,
+					backgroundColor: '#17a2b8',
+					borderColor: '#138496',
+					borderWidth: 2,
+					borderRadius: 8
+				},
+				{
+					label: 'Labor Requirement (days)',
+					data: labor,
+					backgroundColor: '#6f42c1',
+					borderColor: '#5a32a3',
+					borderWidth: 2,
+					borderRadius: 8
+				}
+			];
+			chartConfig = {
+				type: 'bar',
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return value;
+								}
+							}
+						}
+					}
+				}
+			};
+			break;
+
+		case 'cost':
+			const costs = Object.values(comparison).map(crop => ({
+				seed: crop.seed_cost,
+				fertilizer: crop.fertilizer_cost,
+				labor: crop.labor_cost,
+				other: crop.other_costs
+			}));
+
+			datasets = [
+				{
+					label: 'Seed Cost',
+					data: costs.map(c => c.seed),
+					backgroundColor: '#FF6384',
+					borderColor: '#FF4069',
+					borderWidth: 2,
+					borderRadius: 6
+				},
+				{
+					label: 'Fertilizer Cost',
+					data: costs.map(c => c.fertilizer),
+					backgroundColor: '#36A2EB',
+					borderColor: '#1E90FF',
+					borderWidth: 2,
+					borderRadius: 6
+				},
+				{
+					label: 'Labor Cost',
+					data: costs.map(c => c.labor),
+					backgroundColor: '#FFCE56',
+					borderColor: '#FFD700',
+					borderWidth: 2,
+					borderRadius: 6
+				},
+				{
+					label: 'Other Costs',
+					data: costs.map(c => c.other),
+					backgroundColor: '#4BC0C0',
+					borderColor: '#20B2AA',
+					borderWidth: 2,
+					borderRadius: 6
+				}
+			];
+			chartConfig = {
+				type: 'bar',
+				options: {
+					responsive: true,
+					scales: {
+						x: {
+							stacked: false,
+						},
+						y: {
+							stacked: false,
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return '₹' + value.toLocaleString();
+								}
+							}
+						}
+					},
+					plugins: {
+						legend: {
+							position: 'top',
+							labels: {
+								usePointStyle: true,
+								padding: 20
+							}
+						}
+					}
+				}
+			};
+			break;
+	}
+
+	charts.main = new Chart(ctx, {
+		...chartConfig,
+		data: {
+			labels: labels,
+			datasets: datasets
+		},
+		options: {
+			...chartConfig.options,
+			responsive: true,
+			maintainAspectRatio: false,
+			plugins: {
+				...chartConfig.options?.plugins,
+				tooltip: {
+					callbacks: {
+						label: function(context) {
+							if (chartType === 'profit') {
+								return 'Profit: ₹' + context.parsed.y.toLocaleString();
+							} else if (chartType === 'roi') {
+								return 'ROI: ' + context.parsed.y.toFixed(1) + '%';
+							} else if (chartType === 'cost') {
+								return context.dataset.label + ': ₹' + context.parsed.y.toLocaleString();
+							} else if (chartType === 'resource') {
+								if (context.dataset.label.includes('Water')) {
+									return 'Water: ' + context.parsed.y + ' mm';
+								} else {
+									return 'Labor: ' + context.parsed.y + ' days';
+								}
+							}
+							return context.dataset.label + ': ' + context.parsed.y;
+						}
+					}
+				}
+			}
+		}
+	});
+}
+
+// Old chart functions removed - now using unified interactive chart
+
+function setupChartSwitching(comparison) {
+	document.querySelectorAll('input[name="chartType"]').forEach(radio => {
+		radio.addEventListener('change', function() {
+			updateMainChart(comparison, this.value);
+		});
+	});
+}
+
+function displayTopPerformers(comparison) {
+	const topPerformers = document.getElementById('topPerformers');
+	const crops = Object.values(comparison);
+
+	// Sort by ROI
+	const sortedByROI = [...crops].sort((a, b) => b.roi - a.roi);
+
+	topPerformers.innerHTML = '';
+
+	sortedByROI.slice(0, 3).forEach((crop, index) => {
+		const performerDiv = document.createElement('div');
+		performerDiv.className = 'top-performer-item';
+		performerDiv.innerHTML = `
+			<div class="d-flex align-items-center">
+				<div class="top-performer-rank rank-${index + 1}">${index + 1}</div>
+				<div class="ms-2">
+					<div class="fw-bold">${crop.name}</div>
+					<small class="text-muted">${crop.roi.toFixed(1)}% ROI</small>
+				</div>
+			</div>
+			<div class="text-end">
+				<div class="fw-bold text-success">₹${crop.profit.toLocaleString()}</div>
+				<small class="text-muted">profit</small>
+			</div>
+		`;
+		topPerformers.appendChild(performerDiv);
+	});
+}
+
+function displayCompactTable(comparison) {
+	const tableBody = document.getElementById('comparisonTableBody');
+	tableBody.innerHTML = '';
+
+	Object.entries(comparison).forEach(([cropKey, crop]) => {
+		const row = document.createElement('tr');
+
+		const getPerformanceClass = (roi) => {
+			if (roi >= 50) return 'performance-excellent';
+			if (roi >= 20) return 'performance-good';
+			return 'performance-poor';
+		};
+
+		row.innerHTML = `
+			<td class="fw-bold">${crop.name}</td>
+			<td class="${crop.profit >= 0 ? 'profit-positive' : 'profit-negative'}">
+				₹${crop.profit.toLocaleString()}
+			</td>
+			<td>
+				<span class="performance-indicator ${getPerformanceClass(crop.roi)}">
+					${crop.roi.toFixed(1)}%
+				</span>
+			</td>
+			<td>${crop.growing_period} days</td>
+			<td>${crop.water_requirement} mm</td>
+			<td>${crop.labor_requirement} days</td>
+			<td><span class="badge ${crop.market_demand === 'Very High' ? 'bg-success' : 'bg-warning'}">${crop.market_demand}</span></td>
+			<td class="detailed-col" style="display: none;">₹${crop.total_cost.toLocaleString()}</td>
+			<td class="detailed-col" style="display: none;">₹${crop.total_revenue.toLocaleString()}</td>
+			<td class="detailed-col" style="display: none;"><span class="badge bg-secondary">${crop.category}</span></td>
+		`;
+		tableBody.appendChild(row);
+	});
+}
+
+function toggleDetailedView() {
+	const table = document.getElementById('comparisonTable');
+	const toggleText = document.getElementById('toggleText');
+
+	if (table.classList.contains('detailed-view-active')) {
+		table.classList.remove('detailed-view-active');
+		toggleText.textContent = 'Show Details';
+	} else {
+		table.classList.add('detailed-view-active');
+		toggleText.textContent = 'Hide Details';
+	}
+}
+
+function toggleCropDetails() {
+	const detailsDiv = document.getElementById('detailedCropInfo');
+	const icon = document.getElementById('detailsIcon');
+	const toggleText = document.getElementById('detailsToggleText');
+
+	if (detailsDiv.style.display === 'none') {
+		detailsDiv.style.display = 'block';
+		icon.className = 'fas fa-chevron-up me-1';
+		toggleText.textContent = 'Hide Details';
+	} else {
+		detailsDiv.style.display = 'none';
+		icon.className = 'fas fa-chevron-down me-1';
+		toggleText.textContent = 'Show Details';
+	}
+}
+
+function displayDetailedCropInfo(comparison) {
+	const detailedInfo = document.getElementById('detailedCropInfo');
+	detailedInfo.innerHTML = '';
+
+	Object.entries(comparison).forEach(([cropKey, crop]) => {
+		const cropCard = document.createElement('div');
+		cropCard.className = 'crop-detail-compact';
+		cropCard.innerHTML = `
+			<h5 class="fw-bold text-primary mb-3">${crop.name}</h5>
+
+			<div class="metric-grid">
+				<div class="metric-card">
+					<h6>Investment</h6>
+					<div class="value">₹${crop.total_cost.toLocaleString()}</div>
+				</div>
+				<div class="metric-card">
+					<h6>Revenue</h6>
+					<div class="value">₹${crop.total_revenue.toLocaleString()}</div>
+				</div>
+				<div class="metric-card">
+					<h6>Profit</h6>
+					<div class="value ${crop.profit >= 0 ? 'profit-positive' : 'profit-negative'}">₹${crop.profit.toLocaleString()}</div>
+				</div>
+				<div class="metric-card">
+					<h6>ROI</h6>
+					<div class="value ${crop.roi >= 0 ? 'profit-positive' : 'profit-negative'}">${crop.roi.toFixed(1)}%</div>
+				</div>
+				<div class="metric-card">
+					<h6>Yield</h6>
+					<div class="value">${crop.average_yield.toLocaleString()} kg/ha</div>
+				</div>
+				<div class="metric-card">
+					<h6>Market Price</h6>
+					<div class="value">₹${crop.market_price}/kg</div>
+				</div>
+				<div class="metric-card">
+					<h6>Growing Period</h6>
+					<div class="value">${crop.growing_period} days</div>
+				</div>
+				<div class="metric-card">
+					<h6>Water Need</h6>
+					<div class="value">${crop.water_requirement} mm</div>
+				</div>
+				<div class="metric-card">
+					<h6>Labor Need</h6>
+					<div class="value">${crop.labor_requirement} days</div>
+				</div>
+				<div class="metric-card">
+					<h6>Storage Life</h6>
+					<div class="value">${crop.storage_life} months</div>
+				</div>
+				<div class="metric-card">
+					<h6>Soil Type</h6>
+					<div class="value" style="font-size: 0.9rem;">${crop.soil_type.join(', ')}</div>
+				</div>
+				<div class="metric-card">
+					<h6>Climate</h6>
+					<div class="value" style="font-size: 0.9rem;">${crop.climate}</div>
+				</div>
+			</div>
+		`;
+		detailedInfo.appendChild(cropCard);
+	});
+}
+
+function showError(message) {
+	document.getElementById('errorText').textContent = message;
+	document.getElementById('errorMessage').style.display = 'block';
+}
+</script>
+
+{% endblock %}

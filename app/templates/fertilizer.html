@@ -1,133 +1,199 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %}
 
-<style>
-  html body {
-    background-color: rgb(206, 206, 228);
-  }
-</style>
-<!--Form Section-->
-<br /><br />
-<h2 style="text-align: center; margin: 0px; color: black">
-  <b>Get informed advice on fertilizer based on soil</b>
-</h2>
-<br />
-
-<div
-  style="
-    width: 350px;
-    height: 40rem;
-    margin: 0px auto;
-    color: black;
-    border-radius: 25px;
-    padding: 10px 10px;
-  "
->
-  <form method="POST" action="{{ url_for('fert_recommend') }}">
-    <div class="form-group">
-      <label for="Nitrogen" style="font-size: 17px"><b>Nitrogen</b></label>
-      <input
-        type="number"
-        class="form-control"
-        id="Nitrogen"
-        name="nitrogen"
-        placeholder="Enter the value (example:50)"
-        style="font-weight: bold"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="Phosphorous" style="font-size: 17px"
-        ><b>Phosphorous</b></label
-      >
-      <input
-        type="number"
-        class="form-control"
-        id="Phosphorous"
-        name="phosphorous"
-        placeholder="Enter the value (example:50)"
-        style="font-weight: bold"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="Pottasium" style="font-size: 17px"><b>Pottasium</b></label>
-      <input
-        type="number"
-        class="form-control"
-        id="Pottasium"
-        name="pottasium"
-        placeholder="Enter the value (example:50)"
-        style="font-weight: bold"
-        required
-      />
-    </div>
-    <!-- <div class="form-group">
-      <label for="ph" style="font-size: 17px"><b>ph level</b></label>
-      <input
-        type="text"
-        class="form-control"
-        id="ph"
-        name="ph"
-        placeholder="Enter the value"
-        style="font-weight: bold"
-        required
-      />
-    </div> -->
-    <div class="form-group">
-      <label for="crop" style="font-size: 17px"
-        ><b>Crop you want to grow</b></label
-      >
-      <select
-        name="cropname"
-        class="form-control"
-        id="crop"
-        placeholder="Select a crop"
-        style="font-weight: bold"
-        required
-      >
-        <option selected>Select crop</option>
-        <option>rice</option>
-        <option>maize</option>
-        <option>chickpea</option>
-        <option>kidneybeans</option>
-        <option>pigeonpeas</option>
-        <option>mothbeans</option>
-        <option>mungbean</option>
-        <option>blackgram</option>
-        <option>lentil</option>
-        <option>pomegranate</option>
-        <option>banana</option>
-        <option>mango</option>
-        <option>grapes</option>
-        <option>watermelon</option>
-        <option>muskmelon</option>
-        <option>apple</option>
-        <option>orange</option>
-        <option>papaya</option>
-        <option>coconut</option>
-        <option>cotton</option>
-        <option>jute</option>
-        <option>coffee</option>
-      </select>
-    </div>
-
-    <div class="d-flex justify-content-center">
-      <button
-        type="submit"
-        class="btn btn-info"
-        style="
-          color: black;
-          font-weight: bold;
-          width: 130px;
-          height: 50px;
-          border-radius: 12px;
-          font-size: 21px;
-        "
-      >
-        Predict
-      </button>
-    </div>
-  </form>
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+	<div class="container">
+		<h1 data-aos="fade-up">
+			<i class="fas fa-flask me-3"></i>Soil Optimizer
+		</h1>
+		<p data-aos="fade-up" data-aos-delay="200">
+			Get precise fertilizer recommendations tailored to your soil's specific nutrient needs and crop requirements
+		</p>
+	</div>
 </div>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<!-- Info Cards -->
+			<div class="row mb-5">
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="100">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-vial text-warning fa-2x mb-2"></i>
+						<h6 class="fw-bold">NPK Analysis</h6>
+						<small class="text-muted">Precise nutrient requirement calculation</small>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="200">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-leaf text-success fa-2x mb-2"></i>
+						<h6 class="fw-bold">Crop-Specific</h6>
+						<small class="text-muted">Tailored for your chosen crop</small>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="300">
+					<div class="card-modern text-center p-3">
+						<i class="fas fa-dollar-sign text-info fa-2x mb-2"></i>
+						<h6 class="fw-bold">Cost Optimized</h6>
+						<small class="text-muted">Maximum efficiency, minimum cost</small>
+					</div>
+				</div>
+			</div>
+
+			<!-- Form -->
+			<div class="form-modern" data-aos="fade-up" data-aos-delay="400">
+				<div class="text-center mb-4">
+					<h3 class="text-gradient fw-bold">Soil Nutrient Analysis</h3>
+					<p class="text-muted">Enter your current soil nutrient levels and target crop for optimal fertilizer recommendations</p>
+				</div>
+
+				<form method="POST" action="{{ url_for('fert_recommend') }}">
+					<div class="row">
+						<!-- Current Soil Nutrients -->
+						<div class="col-12 mb-4">
+							<h5 class="fw-bold text-primary mb-3">
+								<i class="fas fa-flask me-2"></i>Current Soil Nutrient Levels
+							</h5>
+						</div>
+
+						<div class="col-md-4 mb-3">
+							<label for="Nitrogen" class="form-label-modern">
+								<i class="fas fa-flask me-2 text-primary"></i>Nitrogen (N)
+							</label>
+							<input type="number" class="form-control form-control-modern" id="Nitrogen"
+								   name="nitrogen" placeholder="Current N content (kg/ha)" required>
+							<small class="text-muted">Available nitrogen in soil</small>
+						</div>
+
+						<div class="col-md-4 mb-3">
+							<label for="Phosphorous" class="form-label-modern">
+								<i class="fas fa-flask me-2 text-warning"></i>Phosphorous (P)
+							</label>
+							<input type="number" class="form-control form-control-modern" id="Phosphorous"
+								   name="phosphorous" placeholder="Current P content (kg/ha)" required>
+							<small class="text-muted">Available phosphorous in soil</small>
+						</div>
+
+						<div class="col-md-4 mb-3">
+							<label for="Pottasium" class="form-label-modern">
+								<i class="fas fa-flask me-2 text-success"></i>Potassium (K)
+							</label>
+							<input type="number" class="form-control form-control-modern" id="Pottasium"
+								   name="pottasium" placeholder="Current K content (kg/ha)" required>
+							<small class="text-muted">Available potassium in soil</small>
+						</div>
+
+						<!-- Crop Selection -->
+						<div class="col-12 mb-4 mt-4">
+							<h5 class="fw-bold text-success mb-3">
+								<i class="fas fa-seedling me-2"></i>Target Crop
+							</h5>
+						</div>
+
+						<div class="col-md-12 mb-4">
+							<label for="crop" class="form-label-modern">
+								<i class="fas fa-wheat-awn me-2 text-success"></i>Select Your Crop
+							</label>
+							<select name="cropname" class="form-control form-control-modern" id="crop" required>
+								<option value="">Choose the crop you want to grow</option>
+								<optgroup label="Cereals">
+									<option value="rice">Rice</option>
+									<option value="maize">Maize (Corn)</option>
+								</optgroup>
+								<optgroup label="Legumes">
+									<option value="chickpea">Chickpea</option>
+									<option value="kidneybeans">Kidney Beans</option>
+									<option value="pigeonpeas">Pigeon Peas</option>
+									<option value="mothbeans">Moth Beans</option>
+									<option value="mungbean">Mung Bean</option>
+									<option value="blackgram">Black Gram</option>
+									<option value="lentil">Lentil</option>
+								</optgroup>
+								<optgroup label="Fruits">
+									<option value="pomegranate">Pomegranate</option>
+									<option value="banana">Banana</option>
+									<option value="mango">Mango</option>
+									<option value="grapes">Grapes</option>
+									<option value="watermelon">Watermelon</option>
+									<option value="muskmelon">Muskmelon</option>
+									<option value="apple">Apple</option>
+									<option value="orange">Orange</option>
+									<option value="papaya">Papaya</option>
+									<option value="coconut">Coconut</option>
+								</optgroup>
+								<optgroup label="Cash Crops">
+									<option value="cotton">Cotton</option>
+									<option value="jute">Jute</option>
+									<option value="coffee">Coffee</option>
+								</optgroup>
+							</select>
+							<small class="text-muted">Select the crop you plan to cultivate</small>
+						</div>
+					</div>
+
+					<!-- Submit Button -->
+					<div class="text-center">
+						<button type="submit" class="btn btn-modern btn-lg px-5">
+							<i class="fas fa-calculator me-2"></i>Get Fertilizer Recommendation
+						</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- Benefits -->
+			<div class="mt-5" data-aos="fade-up">
+				<h4 class="text-center mb-4 fw-bold">Why Use Our Soil Optimizer?</h4>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-success bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-check text-success"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Precise Recommendations</h6>
+								<small class="text-muted">Get exact fertilizer types and quantities based on your soil's current nutrient status</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-chart-line text-warning"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Maximize Yield</h6>
+								<small class="text-muted">Optimize nutrient levels for maximum crop productivity and quality</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-info bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-coins text-info"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Cost Effective</h6>
+								<small class="text-muted">Avoid over-fertilization and reduce unnecessary expenses</small>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="d-flex align-items-start">
+							<div class="bg-success bg-opacity-10 rounded-circle p-2 me-3 mt-1">
+								<i class="fas fa-leaf text-success"></i>
+							</div>
+							<div>
+								<h6 class="fw-bold">Eco-Friendly</h6>
+								<small class="text-muted">Prevent soil degradation and environmental pollution</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

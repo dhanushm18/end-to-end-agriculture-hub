@@ -1,110 +1,722 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<!-- banner -->
-<section class="banner_w3lspvt" id="home">
-	<div class="csslider infinity" id="slider1">
+<!-- Hero Section -->
+<section class="hero-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a4d3a 0%, #2d5a27 30%, #4a7c59 70%, #7fb069 100%); min-height: 100vh; display: flex; align-items: center;">
+	<!-- Animated Background -->
+	<div class="hero-bg-animation">
+		<div class="floating-particles"></div>
+		<div class="grid-overlay"></div>
+	</div>
 	
-				<div class="banner-top">
-					<div class="overlay">
-						<div class="container">
-							<div class="w3layouts-banner-info text-center">
-								<h3 class="text-wh">Harvestify</h3>
-								<h4 class="text-wh mx-auto my-4"><b>Get informed decisions about your farming strategy.</b></h4>
-								<br>
-								<h4 class="text-wh mx-auto my-4"><strong> Here are some questions we'll answer</strong></h4>
-								<p class="text-li mx-auto mt-2">
-									1. What crop to plant here? <br>
-									2. What fertilizer to use? <br>
-									3. Which disease do your crop have?<br>
-									4. How to cure the disease?</p>
+	<div class="position-absolute w-100 h-100" style="background: rgba(0,0,0,0.4);"></div>
+	<div class="container position-relative" style="z-index: 10;">
+		<div class="row align-items-center min-vh-100">
+			<div class="col-lg-6" data-aos="fade-right">
+				<div class="hero-content text-white">
+					<!-- Project Badge -->
+					<div class="project-badge mb-4" data-aos="fade-up">
+						<span class="badge-icon">⚡</span>
+						<span class="badge-text">AI-Powered Agriculture Platform</span>
+					</div>
+					
+					<h1 class="hero-title mb-4" data-aos="fade-up" data-aos-delay="200">
+						<span class="title-line-1">Welcome to</span>
+						<span class="title-line-2">
+							<span class="agri-text">AGRICULTURE</span>
+							<span class="hub-text">HUB</span>
+						</span>
+					</h1>
+					
+					<h2 class="hero-subtitle mb-4" data-aos="fade-up" data-aos-delay="400">
+						🚀 Revolutionizing Agriculture with Artificial Intelligence
+					</h2>
+					
+					<p class="hero-description mb-5" data-aos="fade-up" data-aos-delay="600">
+						Experience the future of farming with our comprehensive AI platform featuring intelligent crop recommendations, 
+						instant disease detection, soil optimization, weather forecasting, and data-driven agricultural insights.
+					</p>
+					
+					<!-- Key Stats -->
+					<div class="hero-stats mb-5" data-aos="fade-up" data-aos-delay="800">
+						<div class="stat-item">
+							<div class="stat-number">98.5%</div>
+							<div class="stat-label">AI Accuracy</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number">38+</div>
+							<div class="stat-label">Disease Types</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number">5+</div>
+							<div class="stat-label">AI Features</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number">24/7</div>
+							<div class="stat-label">Support</div>
+						</div>
+					</div>
+					
+					<div class="hero-buttons" data-aos="fade-up" data-aos-delay="1000">
+						<a href="#features" class="btn btn-hero-primary btn-lg me-3">
+							<i class="fas fa-rocket me-2"></i>Explore Platform
+						</a>
+						<a href="#demo" class="btn btn-hero-secondary btn-lg">
+							<i class="fas fa-play me-2"></i>Watch Demo
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+				<div class="hero-visual position-relative">
+					<!-- Main Dashboard Mockup -->
+					<div class="dashboard-mockup" data-aos="zoom-in" data-aos-delay="400">
+						<div class="dashboard-header">
+							<div class="dashboard-title">
+								<i class="fas fa-leaf me-2"></i>AGRI HUB Dashboard
+							</div>
+							<div class="dashboard-status">
+								<span class="status-dot"></span>Live System
+							</div>
+						</div>
+						<div class="dashboard-body">
+							<div class="metric-row">
+								<div class="metric-card">
+									<div class="metric-icon">
+										<i class="fas fa-seedling text-success"></i>
+									</div>
+									<div class="metric-info">
+										<div class="metric-value">1,247</div>
+										<div class="metric-label">Crops Analyzed</div>
+									</div>
+								</div>
+								<div class="metric-card">
+									<div class="metric-icon">
+										<i class="fas fa-bug text-danger"></i>
+									</div>
+									<div class="metric-info">
+										<div class="metric-value">98.5%</div>
+										<div class="metric-label">Disease Detection</div>
+									</div>
+								</div>
+							</div>
+							<div class="chart-area">
+								<div class="chart-title">Yield Improvement</div>
+								<div class="chart-bars">
+									<div class="bar" style="height: 60%;"></div>
+									<div class="bar" style="height: 80%;"></div>
+									<div class="bar" style="height: 95%;"></div>
+									<div class="bar" style="height: 75%;"></div>
+									<div class="bar" style="height: 90%;"></div>
+								</div>
 							</div>
 						</div>
 					</div>
+					
+					<!-- Floating Feature Cards -->
+					<div class="floating-feature top-right" data-aos="fade-up" data-aos-delay="600">
+						<div class="feature-icon">
+							<i class="fas fa-brain text-primary"></i>
+						</div>
+						<div class="feature-content">
+							<div class="feature-title">AI Analysis</div>
+							<div class="feature-desc">Real-time Processing</div>
+						</div>
+					</div>
+					
+					<div class="floating-feature bottom-left" data-aos="fade-up" data-aos-delay="800">
+						<div class="feature-icon">
+							<i class="fas fa-cloud-sun text-warning"></i>
+						</div>
+						<div class="feature-content">
+							<div class="feature-title">Weather AI</div>
+							<div class="feature-desc">7-Day Forecasting</div>
+						</div>
+					</div>
+					
+					<div class="floating-feature middle-right" data-aos="fade-up" data-aos-delay="1000">
+						<div class="feature-icon">
+							<i class="fas fa-microscope text-info"></i>
+						</div>
+						<div class="feature-content">
+							<div class="feature-title">Disease Detection</div>
+							<div class="feature-desc">Instant Analysis</div>
+						</div>
+					</div>
 				</div>
-	</div>
-</section>
-<!-- //banner -->
-
-<!-- core values -->
-<section class="core-value py-5">
-	<div class="container py-md-4">
-		<h3 class="heading mb-sm-5 mb-4 text-center"> About Us</h3>
-		<div class="row core-grids">
-			<div class="col-lg-6 core-left">
-				<img src="{{ url_for('static', filename='images/core.jpg') }}" class="img-fluid" alt="" />
-			</div>
-			<div class="col-lg-6 core-right">
-				<h3 class="mt-4">Improving Agriculture, Improving Lives, Cultivating Crops To Make Farmers Increase
-					Profit.</h3>
-				<p class="mt-3">We use state-of-the-art machine learning and deep learning technologies to help you
-					guide through
-					the entire farming process. Make informed decisions to understand the demographics of your area,
-					understand the
-					factors that affect your crop and keep them healthy for a super awesome successful yield.</p>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- //core values -->
 
-<!-- Products & Services -->
-<section class="blog py-5">
-	<div class="container py-md-5">
-		<h3 class="heading mb-sm-5 mb-4 text-center"> Our Services</h3>
-		<div class="row blog-grids">
-			<div class="col-lg-4 col-md-6 blog-left mb-lg-0 mb-sm-5 pb-lg-0 pb-5">
-				<img src="{{ url_for('static', filename='images/s3.jpg') }}" class="img-fluid" alt="" />
-				<a href="{{ url_for('crop_recommend') }}">
-					<div class="blog-info">
-
-						<h4>Crop</h4>
-
-						<p class="mt-2"> Recommendation about the type of crops to be cultivated which is best suited
-							for the respective conditions</p>
+<!-- Features Section -->
+<section id="features" class="features-section py-5" style="background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);">
+	<div class="container">
+		<div class="text-center mb-5" data-aos="fade-up">
+			<h2 class="display-4 fw-bold text-dark mb-3">
+				🌟 Platform Features
+			</h2>
+			<p class="lead text-muted">
+				Comprehensive AI-powered tools for modern agriculture
+			</p>
+		</div>
+		
+		<div class="row g-4">
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-seedling"></i>
 					</div>
-				</a>
+					<h4 class="feature-card-title">Smart Crop Recommendation</h4>
+					<p class="feature-card-desc">
+						AI-powered crop suggestions based on soil conditions, weather patterns, and regional data for optimal yield.
+					</p>
+					<a href="{{ url_for('crop_recommend') }}" class="feature-card-link">
+						Try Now <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
 			</div>
-			<div class="col-lg-4 col-md-6 blog-middle mb-lg-0 mb-sm-5 pb-lg-0 pb-md-5">
-				<img src="{{ url_for('static', filename='images/s2.jpg') }}" class="img-fluid" alt="" />
-				<a href="{{ url_for('fertilizer_recommendation') }}">
-					<div class="blog-info">
-						<h4>Fertilizer</h4>
-						<p class="mt-2">Recommendation about the type of fertilizer best suited for the particular soil
-							and the recommended crop</p>
+			
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-microscope"></i>
 					</div>
-				</a>
+					<h4 class="feature-card-title">Disease Detection AI</h4>
+					<p class="feature-card-desc">
+						Instant plant disease identification using advanced computer vision and machine learning algorithms.
+					</p>
+					<a href="{{ url_for('disease_prediction') }}" class="feature-card-link">
+						Analyze Now <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
 			</div>
-			<div class="col-lg-4 col-md-6 blog-right mt-lg-0 mt-5 pt-lg-0 pt-md-5">
-
-				<img src="{{ url_for('static', filename='images/s4.jpg') }}" class="img-fluid" alt="">
-
-				<!-- <img src="images/s4.jpg" class="img-fliud" alt="" /> -->
-				<a href="{{ url_for('disease_prediction') }}">
-					<div class="blog-info">
-						<h4>Crop Disease</h4>
-						<p class="mt-2">Predicting the name and causes of crop disease and suggestions to cure it</p>
+			
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-flask"></i>
 					</div>
-				</a>
+					<h4 class="feature-card-title">Soil Optimizer</h4>
+					<p class="feature-card-desc">
+						Intelligent fertilizer recommendations to optimize soil health and maximize crop productivity.
+					</p>
+					<a href="{{ url_for('fertilizer_recommendation') }}" class="feature-card-link">
+						Optimize <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-cloud-sun"></i>
+					</div>
+					<h4 class="feature-card-title">Weather Intelligence</h4>
+					<p class="feature-card-desc">
+						Advanced weather forecasting with agricultural timing recommendations for optimal farming decisions.
+					</p>
+					<a href="{{ url_for('weather_recommendations') }}" class="feature-card-link">
+						Check Weather <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-chart-line"></i>
+					</div>
+					<h4 class="feature-card-title">Crop Comparison</h4>
+					<p class="feature-card-desc">
+						Data-driven crop comparison with profit analysis, ROI calculations, and market insights.
+					</p>
+					<a href="{{ url_for('crop_comparison') }}" class="feature-card-link">
+						Compare <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+				<div class="feature-card h-100">
+					<div class="feature-card-icon">
+						<i class="fas fa-robot"></i>
+					</div>
+					<h4 class="feature-card-title">AI Assistant</h4>
+					<p class="feature-card-desc">
+						24/7 agricultural chatbot powered by Google AI for instant farming advice and expert guidance.
+					</p>
+					<a href="{{ url_for('chatbot') }}" class="feature-card-link">
+						Chat Now <i class="fas fa-arrow-right ms-2"></i>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- //Products & Services -->
 
+<!-- Technology Stack Section -->
+<section class="tech-section py-5" style="background: #1a4d3a;">
+	<div class="container">
+		<div class="text-center mb-5" data-aos="fade-up">
+			<h2 class="display-4 fw-bold text-white mb-3">
+				⚡ Powered by Advanced Technology
+			</h2>
+			<p class="lead text-light opacity-75">
+				Built with cutting-edge AI and machine learning technologies
+			</p>
+		</div>
+		
+		<div class="row g-4 text-center">
+			<div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+				<div class="tech-item">
+					<div class="tech-icon">
+						<i class="fab fa-python"></i>
+					</div>
+					<h5 class="tech-title">Python & Flask</h5>
+					<p class="tech-desc">Robust backend framework</p>
+				</div>
+			</div>
+			
+			<div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+				<div class="tech-item">
+					<div class="tech-icon">
+						<i class="fas fa-brain"></i>
+					</div>
+					<h5 class="tech-title">PyTorch</h5>
+					<p class="tech-desc">Deep learning models</p>
+				</div>
+			</div>
+			
+			<div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+				<div class="tech-item">
+					<div class="tech-icon">
+						<i class="fab fa-google"></i>
+					</div>
+					<h5 class="tech-title">Google AI</h5>
+					<p class="tech-desc">Gemini API integration</p>
+				</div>
+			</div>
+			
+			<div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+				<div class="tech-item">
+					<div class="tech-icon">
+						<i class="fas fa-chart-bar"></i>
+					</div>
+					<h5 class="tech-title">Machine Learning</h5>
+					<p class="tech-desc">Advanced algorithms</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-<!-- Creating custom grid and hover effect
-<section>
-<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-    <div class="hovereffect">
-        <img class="img-responsive" src="images/s2.jpg" alt="">
-        <div class="overlay">
-           <h2>Hover effect 1</h2>
-           <a class="info" href="#">link here</a>
-        </div>
-    </div>
-</div> -->
+<style>
+/* Hero Section Styles */
+.project-badge {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 50px;
+	padding: 12px 24px;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	backdrop-filter: blur(10px);
+}
 
-</html>
+.badge-icon {
+	font-size: 1.2rem;
+}
+
+.badge-text {
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+
+.hero-title {
+	font-size: 4rem;
+	font-weight: 900;
+	line-height: 1.1;
+}
+
+.title-line-1 {
+	display: block;
+	font-size: 2.5rem;
+	font-weight: 400;
+	opacity: 0.9;
+}
+
+.title-line-2 {
+	display: block;
+	background: linear-gradient(45deg, #ffd700, #ffed4e, #fff59d);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.agri-text {
+	margin-right: 0.2em;
+}
+
+.hub-text {
+	color: #7fb069 !important;
+	-webkit-text-fill-color: #7fb069 !important;
+}
+
+.hero-subtitle {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #ffd700;
+}
+
+.hero-description {
+	font-size: 1.1rem;
+	line-height: 1.7;
+	opacity: 0.9;
+}
+
+.hero-stats {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.stat-item {
+	text-align: center;
+}
+
+.stat-number {
+	font-size: 2rem;
+	font-weight: 900;
+	color: #ffd700;
+	line-height: 1;
+}
+
+.stat-label {
+	font-size: 0.9rem;
+	opacity: 0.8;
+	margin-top: 5px;
+}
+
+.btn-hero-primary {
+	background: linear-gradient(45deg, #ffd700, #ffed4e);
+	border: none;
+	color: #1a4d3a;
+	font-weight: 700;
+	padding: 15px 30px;
+	border-radius: 50px;
+	transition: all 0.3s ease;
+}
+
+.btn-hero-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+	color: #1a4d3a;
+}
+
+.btn-hero-secondary {
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	color: white;
+	font-weight: 600;
+	padding: 13px 28px;
+	border-radius: 50px;
+	transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.5);
+	color: white;
+	transform: translateY(-2px);
+}
+
+/* Dashboard Mockup */
+.dashboard-mockup {
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 20px;
+	padding: 20px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(10px);
+}
+
+.dashboard-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #e9ecef;
+}
+
+.dashboard-title {
+	font-weight: 700;
+	color: #1a4d3a;
+	font-size: 1.1rem;
+}
+
+.dashboard-status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.9rem;
+	color: #28a745;
+	font-weight: 600;
+}
+
+.status-dot {
+	width: 8px;
+	height: 8px;
+	background: #28a745;
+	border-radius: 50%;
+	animation: pulse 2s infinite;
+}
+
+.metric-row {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.metric-card {
+	flex: 1;
+	background: #f8f9fa;
+	border-radius: 12px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.metric-icon i {
+	font-size: 1.5rem;
+}
+
+.metric-value {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #1a4d3a;
+	line-height: 1;
+}
+
+.metric-label {
+	font-size: 0.8rem;
+	color: #6c757d;
+	margin-top: 2px;
+}
+
+.chart-area {
+	background: #f8f9fa;
+	border-radius: 12px;
+	padding: 15px;
+}
+
+.chart-title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #1a4d3a;
+	margin-bottom: 10px;
+}
+
+.chart-bars {
+	display: flex;
+	align-items: end;
+	gap: 8px;
+	height: 60px;
+}
+
+.bar {
+	flex: 1;
+	background: linear-gradient(to top, #7fb069, #4a7c59);
+	border-radius: 4px 4px 0 0;
+	animation: growUp 2s ease-out;
+}
+
+/* Floating Features */
+.floating-feature {
+	position: absolute;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 15px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(10px);
+	min-width: 200px;
+}
+
+.top-right {
+	top: 10%;
+	right: -5%;
+}
+
+.bottom-left {
+	bottom: 20%;
+	left: -10%;
+}
+
+.middle-right {
+	top: 50%;
+	right: -8%;
+}
+
+.feature-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8f9fa;
+}
+
+.feature-icon i {
+	font-size: 1.2rem;
+}
+
+.feature-title {
+	font-weight: 700;
+	color: #1a4d3a;
+	font-size: 0.9rem;
+	line-height: 1;
+}
+
+.feature-desc {
+	font-size: 0.8rem;
+	color: #6c757d;
+	margin-top: 2px;
+}
+
+/* Feature Cards */
+.feature-card {
+	background: white;
+	border-radius: 20px;
+	padding: 30px;
+	text-align: center;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	border: 1px solid #f0f0f0;
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card-icon {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto 20px;
+	background: linear-gradient(45deg, #7fb069, #4a7c59);
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.feature-card-icon i {
+	font-size: 2rem;
+	color: white;
+}
+
+.feature-card-title {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #1a4d3a;
+	margin-bottom: 15px;
+}
+
+.feature-card-desc {
+	color: #6c757d;
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+.feature-card-link {
+	color: #7fb069;
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.feature-card-link:hover {
+	color: #4a7c59;
+}
+
+/* Tech Section */
+.tech-item {
+	color: white;
+}
+
+.tech-icon {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto 20px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tech-icon i {
+	font-size: 2rem;
+	color: #ffd700;
+}
+
+.tech-title {
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.tech-desc {
+	opacity: 0.8;
+	font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.5; }
+}
+
+@keyframes growUp {
+	from { height: 0; }
+	to { height: inherit; }
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 2.5rem;
+	}
+	
+	.title-line-1 {
+		font-size: 1.8rem;
+	}
+	
+	.hero-stats {
+		gap: 1rem;
+	}
+	
+	.floating-feature {
+		position: relative;
+		top: auto !important;
+		right: auto !important;
+		bottom: auto !important;
+		left: auto !important;
+		margin: 10px 0;
+	}
+}
+</style>
 
 {% endblock %}
