@@ -244,8 +244,9 @@
 	<nav class="navbar navbar-expand-lg navbar-modern" id="mainNavbar">
 		<div class="container">
 			<a class="navbar-brand-modern" href="{{ url_for('home') }}">
+				<img src="{{ url_for('static', filename='images/logo.png') }}" alt="AGRI HUB Logo" style="height: 40px; width: auto; margin-right: 10px;">
 				<i class="fas fa-seedling"></i>
-				AGRICULTURE HUB
+				AGRI HUB
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -302,8 +303,11 @@
 				<!-- Brand Section -->
 				<div class="col-lg-4 col-md-6">
 					<div class="d-flex align-items-center mb-3">
-						<i class="fas fa-seedling text-success me-2" style="font-size: 2rem;"></i>
-						<h3 class="text-success mb-0 fw-bold">AGRI HUB</h3>
+						<img src="{{ url_for('static', filename='images/logo.png') }}" alt="AGRI HUB Logo" style="height: 50px; width: auto; margin-right: 15px;">
+						<div>
+							<h3 class="text-success mb-0 fw-bold">AGRI HUB</h3>
+							<small class="text-light opacity-75">AI-Powered Agriculture</small>
+						</div>
 					</div>
 					<p class="text-light opacity-75 mb-4">
 						Empowering farmers worldwide with AI-driven agricultural solutions. 
@@ -480,6 +484,7 @@
 		<div id="chatbot-window" class="chatbot-window">
 			<div class="chatbot-header">
 				<div class="chatbot-title">
+					<img src="{{ url_for('static', filename='images/logo.png') }}" alt="AGRI HUB Logo" style="height: 24px; width: auto; margin-right: 8px;">
 					<i class="fas fa-leaf me-2"></i>AGRI BOT
 				</div>
 				<div class="chatbot-subtitle">Your AI Agriculture Assistant</div>
