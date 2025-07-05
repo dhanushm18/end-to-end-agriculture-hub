@@ -1,6 +1,21 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<!-- Floating Marquee Banner -->
+<div class="floating-marquee" id="floatingMarquee">
+	<div class="marquee-content">
+		<span class="marquee-text">
+			🎓 Developed by AIML Students - PES College of Engineering, Mandya 🎓
+			Artificial Intelligence & Machine Learning Department 🎓
+			Proudly Showcasing Academic Excellence in AI/ML 🎓
+			Innovation in Agriculture Technology 🎓
+		</span>
+	</div>
+	<button class="marquee-close" onclick="closeMarquee()" title="Close Banner">
+		<i class="fas fa-times"></i>
+	</button>
+</div>
+
 <!-- Hero Section -->
 <section class="hero-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a4d3a 0%, #2d5a27 30%, #4a7c59 70%, #7fb069 100%); min-height: 100vh; display: flex; align-items: center;">
 	<!-- Animated Background -->
@@ -19,9 +34,16 @@
 						<span class="badge-icon">⚡</span>
 						<span class="badge-text">AI-Powered Agriculture Platform</span>
 					</div>
+
+					<!-- Developer Badge -->
+					<div class="developer-badge mb-4" data-aos="fade-up" data-aos-delay="50">
+						<span class="dev-icon">🎓</span>
+						<span class="dev-text">Developed by AIML Students</span>
+						<span class="dev-subtitle">PES College of Engineering, Mandya</span>
+					</div>
 					
 					<div class="hero-logo-section mb-4" data-aos="fade-up" data-aos-delay="100">
-						<img src="{{ url_for('static', filename='images/logo.png') }}" alt="AGRI HUB Logo" style="height: 80px; width: auto; margin-bottom: 20px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
+						<img src="{{ url_for('static', filename='images/leaf.png') }}" alt="AGRI HUB Logo" style="height: 80px; width: auto; margin-bottom: 20px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
 					</div>
 
 					<h1 class="hero-title mb-4" data-aos="fade-up" data-aos-delay="200">
@@ -317,7 +339,163 @@
 	</div>
 </section>
 
+<!-- Development Team Section -->
+<section class="team-section py-5" style="background: linear-gradient(135deg, #ffc107 0%, #ffed4e 100%);">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+				<div class="team-content">
+					<div class="team-icon mb-4">
+						<i class="fas fa-graduation-cap" style="font-size: 4rem; color: #1a4d3a;"></i>
+					</div>
+					<h2 class="team-title mb-3" style="color: #1a4d3a; font-weight: 800;">
+						🎓 Proudly Developed by AIML Students
+					</h2>
+					<h4 class="team-subtitle mb-4" style="color: #2d5a27; font-weight: 600;">
+						PES College of Engineering, Mandya
+					</h4>
+					<p class="team-description mb-4" style="color: #1a4d3a; font-size: 1.1rem; line-height: 1.7;">
+						This comprehensive Agriculture Hub platform represents the culmination of advanced learning in
+						<strong>Artificial Intelligence and Machine Learning</strong>. Our student team has successfully
+						integrated cutting-edge AI technologies including computer vision, natural language processing,
+						and predictive analytics to create a real-world solution for modern agriculture challenges.
+					</p>
+					<div class="team-features">
+						<div class="row g-3">
+							<div class="col-md-4">
+								<div class="feature-highlight">
+									<i class="fas fa-brain mb-2" style="font-size: 2rem; color: #1a4d3a;"></i>
+									<h6 style="color: #1a4d3a; font-weight: 600;">AI/ML Implementation</h6>
+									<p style="color: #2d5a27; font-size: 0.9rem;">Advanced algorithms and neural networks</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="feature-highlight">
+									<i class="fas fa-code mb-2" style="font-size: 2rem; color: #1a4d3a;"></i>
+									<h6 style="color: #1a4d3a; font-weight: 600;">Full-Stack Development</h6>
+									<p style="color: #2d5a27; font-size: 0.9rem;">End-to-end platform development</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="feature-highlight">
+									<i class="fas fa-seedling mb-2" style="font-size: 2rem; color: #1a4d3a;"></i>
+									<h6 style="color: #1a4d3a; font-weight: 600;">Real-World Impact</h6>
+									<p style="color: #2d5a27; font-size: 0.9rem;">Solving agricultural challenges</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="team-badge mt-4">
+						<span class="badge" style="background: #1a4d3a; color: #ffc107; padding: 12px 24px; border-radius: 50px; font-size: 1rem; font-weight: 600;">
+							<i class="fas fa-award me-2"></i>Academic Excellence in AI/ML
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 <style>
+/* Floating Marquee Styles */
+.floating-marquee {
+	position: fixed;
+	top: 90px;
+	left: 0;
+	width: 100%;
+	background: linear-gradient(135deg, #ffc107, #ffed4e);
+	border: 2px solid #1a4d3a;
+	border-left: none;
+	border-right: none;
+	z-index: 999;
+	overflow: hidden;
+	box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+	backdrop-filter: blur(10px);
+	animation: marqueeFloat 3s ease-in-out infinite alternate;
+	transition: all 0.5s ease;
+}
+
+.marquee-close {
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transform: translateY(-50%);
+	background: #1a4d3a;
+	color: #ffc107;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 0.8rem;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(26, 77, 58, 0.3);
+}
+
+.marquee-close:hover {
+	background: #2d5a27;
+	transform: translateY(-50%) scale(1.1);
+	box-shadow: 0 4px 12px rgba(26, 77, 58, 0.5);
+}
+
+.marquee-content {
+	display: flex;
+	animation: marqueeScroll 25s linear infinite;
+	white-space: nowrap;
+}
+
+.marquee-text {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #1a4d3a;
+	padding: 12px 0;
+	text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+	display: inline-block;
+	min-width: 100%;
+}
+
+@keyframes marqueeScroll {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes marqueeFloat {
+	0% {
+		transform: translateY(0px);
+		box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+	}
+	100% {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
+	}
+}
+
+/* Responsive marquee */
+@media (max-width: 768px) {
+	.floating-marquee {
+		top: 70px;
+	}
+
+	.marquee-text {
+		font-size: 0.9rem;
+		padding: 10px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.marquee-text {
+		font-size: 0.8rem;
+		padding: 8px 0;
+	}
+}
+
 /* Hero Section Styles */
 .project-badge {
 	background: rgba(255, 255, 255, 0.1);
@@ -337,6 +515,37 @@
 .badge-text {
 	font-weight: 600;
 	font-size: 0.9rem;
+}
+
+.developer-badge {
+	background: rgba(255, 215, 0, 0.15);
+	border: 1px solid rgba(255, 215, 0, 0.3);
+	border-radius: 50px;
+	padding: 12px 24px;
+	display: inline-block;
+	text-align: center;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.dev-icon {
+	font-size: 1.2rem;
+	margin-right: 8px;
+}
+
+.dev-text {
+	font-weight: 700;
+	font-size: 1rem;
+	color: #ffd700;
+	display: block;
+	margin-bottom: 2px;
+}
+
+.dev-subtitle {
+	font-weight: 500;
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.8);
+	display: block;
 }
 
 .hero-title {
@@ -723,5 +932,61 @@
 	}
 }
 </style>
+
+<script>
+// Marquee functionality
+function closeMarquee() {
+	const marquee = document.getElementById('floatingMarquee');
+	marquee.style.transform = 'translateY(-100%)';
+	marquee.style.opacity = '0';
+	setTimeout(() => {
+		marquee.style.display = 'none';
+	}, 500);
+
+	// Store in localStorage to remember user preference
+	localStorage.setItem('marqueeHidden', 'true');
+}
+
+// Check if marquee should be hidden on page load
+document.addEventListener('DOMContentLoaded', function() {
+	const marqueeHidden = localStorage.getItem('marqueeHidden');
+	if (marqueeHidden === 'true') {
+		const marquee = document.getElementById('floatingMarquee');
+		marquee.style.display = 'none';
+	}
+
+	// Auto-hide marquee after 15 seconds
+	setTimeout(() => {
+		const marquee = document.getElementById('floatingMarquee');
+		if (marquee && marquee.style.display !== 'none') {
+			marquee.style.opacity = '0.7';
+		}
+	}, 15000);
+
+	// Auto-hide marquee after 30 seconds
+	setTimeout(() => {
+		const marquee = document.getElementById('floatingMarquee');
+		if (marquee && marquee.style.display !== 'none') {
+			closeMarquee();
+		}
+	}, 30000);
+});
+
+// Pause animation on hover
+document.addEventListener('DOMContentLoaded', function() {
+	const marquee = document.querySelector('.marquee-content');
+	const marqueeContainer = document.querySelector('.floating-marquee');
+
+	if (marqueeContainer && marquee) {
+		marqueeContainer.addEventListener('mouseenter', () => {
+			marquee.style.animationPlayState = 'paused';
+		});
+
+		marqueeContainer.addEventListener('mouseleave', () => {
+			marquee.style.animationPlayState = 'running';
+		});
+	}
+});
+</script>
 
 {% endblock %}

@@ -230,6 +230,63 @@
 		.hover-opacity-100:hover {
 			opacity: 1 !important;
 		}
+
+		/* Development Team Badge */
+		.development-team-badge {
+			background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 215, 0, 0.1));
+			border: 1px solid rgba(255, 193, 7, 0.3);
+			border-radius: 15px;
+			padding: 20px;
+			text-align: center;
+			backdrop-filter: blur(10px);
+			box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+		}
+
+		.team-header {
+			margin-bottom: 8px;
+		}
+
+		.team-title {
+			font-size: 1.2rem;
+			font-weight: 700;
+			color: #ffc107;
+		}
+
+		.team-details {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		.college-name {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #e9ecef;
+		}
+
+		.department {
+			font-size: 0.9rem;
+			font-weight: 400;
+			color: rgba(255, 255, 255, 0.7);
+		}
+
+		@media (max-width: 768px) {
+			.development-team-badge {
+				padding: 15px;
+			}
+
+			.team-title {
+				font-size: 1.1rem;
+			}
+
+			.college-name {
+				font-size: 0.9rem;
+			}
+
+			.department {
+				font-size: 0.8rem;
+			}
+		}
 	</style>
 
 	<!-- JavaScript Libraries -->
@@ -244,9 +301,8 @@
 	<nav class="navbar navbar-expand-lg navbar-modern" id="mainNavbar">
 		<div class="container">
 			<a class="navbar-brand-modern" href="{{ url_for('home') }}">
-				<img src="{{ url_for('static', filename='images/logo.png') }}" alt="AGRI HUB Logo" style="height: 40px; width: auto; margin-right: 10px;">
 				<i class="fas fa-seedling"></i>
-				AGRI HUB
+				AGRICULTURE HUB
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -425,12 +481,28 @@
 
 			<hr class="my-4 opacity-25">
 			
+			<!-- Development Team Section -->
+			<div class="row mb-3">
+				<div class="col-12 text-center">
+					<div class="development-team-badge">
+						<div class="team-header">
+							<i class="fas fa-graduation-cap text-warning me-2"></i>
+							<span class="team-title">Developed by AIML Students</span>
+						</div>
+						<div class="team-details">
+							<span class="college-name">PES College of Engineering, Mandya</span>
+							<span class="department">Department of Artificial Intelligence & Machine Learning</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<!-- Bottom Footer -->
 			<div class="row align-items-center">
 				<div class="col-md-6">
 					<p class="mb-0 text-light opacity-75">
-						&copy; 2025 AGRICULTURE HUB. All rights reserved. | 
-						<a href="#" class="text-success text-decoration-none">Privacy Policy</a> | 
+						&copy; 2025 AGRICULTURE HUB. All rights reserved. |
+						<a href="#" class="text-success text-decoration-none">Privacy Policy</a> |
 						<a href="#" class="text-success text-decoration-none">Terms of Service</a>
 					</p>
 				</div>
