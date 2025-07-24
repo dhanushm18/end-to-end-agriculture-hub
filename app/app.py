@@ -662,7 +662,7 @@ app = Flask(__name__)
 
 @ app.route('/')
 def home():
-    title = 'AGRI HUB - AI Powered Crop & Soil Management'
+    title = 'AGRICULTURE HUB - AI Powered Crop & Soil Management'
     return render_template('index.html', title=title)
 
 # render crop recommendation form page
@@ -670,7 +670,7 @@ def home():
 
 @ app.route('/crop-recommend')
 def crop_recommend():
-    title = 'AGRI HUB - Smart Crop Recommendation'
+    title = 'AGRICULTURE HUB - Smart Crop Recommendation'
     return render_template('crop.html', title=title)
 
 # render fertilizer recommendation form page
@@ -678,7 +678,7 @@ def crop_recommend():
 
 @ app.route('/fertilizer')
 def fertilizer_recommendation():
-    title = 'AGRI HUB - Soil Optimizer'
+    title = 'AGRICULTURE HUB - Soil Optimizer'
 
     return render_template('fertilizer.html', title=title)
 
@@ -686,21 +686,21 @@ def fertilizer_recommendation():
 
 @ app.route('/chatbot')
 def chatbot():
-    title = 'AGRI HUB - AI Agriculture Assistant'
+    title = 'AGRICULTURE HUB - AI Agriculture Assistant'
     return render_template('chatbot.html', title=title)
 
 # render weather recommendations page
 
 @ app.route('/weather-recommendations')
 def weather_recommendations():
-    title = 'AGRI HUB - Weather-Aware Recommendations'
+    title = 'AGRICULTURE HUB - Weather-Aware Recommendations'
     return render_template('weather_recommendations.html', title=title)
 
 # render crop comparison dashboard
 
 @ app.route('/crop-comparison')
 def crop_comparison():
-    title = 'AGRI HUB - Crop Comparison Dashboard'
+    title = 'AGRICULTURE HUB - Crop Comparison Dashboard'
     return render_template('crop_comparison.html', title=title)
 
 # render disease prediction input page
@@ -717,7 +717,7 @@ def crop_comparison():
 
 @ app.route('/crop-predict', methods=['POST'])
 def crop_prediction():
-    title = 'AGRI HUB - Smart Crop Recommendation'
+    title = 'AGRICULTURE HUB - Smart Crop Recommendation'
 
     if request.method == 'POST':
         N = int(request.form['nitrogen'])
@@ -746,7 +746,7 @@ def crop_prediction():
 
 @ app.route('/fertilizer-predict', methods=['POST'])
 def fert_recommend():
-    title = 'AGRI HUB - Soil Optimizer'
+    title = 'AGRICULTURE HUB - Soil Optimizer'
 
     crop_name = str(request.form['cropname'])
     N = int(request.form['nitrogen'])
@@ -790,7 +790,7 @@ def fert_recommend():
 
 @app.route('/disease-predict', methods=['GET', 'POST'])
 def disease_prediction():
-    title = 'AGRI HUB - Disease Detection AI'
+    title = 'AGRICULTURE HUB - Disease Detection AI'
 
     if request.method == 'POST':
         if 'file' not in request.files:

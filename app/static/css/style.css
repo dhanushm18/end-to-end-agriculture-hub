@@ -371,41 +371,7 @@ li > a:only-child:after { content: ''; }
     z-index: 1;
 }
 
-.banner-top {
-    background: url(../images/3.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-}
-
-.banner-top1 {
-    background: url(../images/1.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-}
-
-.banner-top2 {
-    background: url(../images/5.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-}
-
-.banner-top3 {
-    background: url(../images/2.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-}
+/* Removed unused banner background classes */
 
 .w3layouts-banner-info {
     padding-top: 16em;
@@ -434,12 +400,7 @@ li > a:only-child:after { content: ''; }
     vertical-align: middle;
 }
 
-.banner-top,
-.banner-top1,
-.banner-top2,
-.banner-top3 {
-    min-height: 770px;
-}
+/* Removed unused banner classes */
 .overlay {
     min-height: 770px;
     background: rgba(0, 0, 0, 0.4);
@@ -549,14 +510,7 @@ p.about-text {
 /*-- //works --*/
 
 /*-- bg --*/
-.background-img {
-    background: url(../images/5.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-}
+/* Removed unused background image class */
 .overlay-clr {
     background: rgba(0, 0, 0, 0.5);
 }
@@ -620,11 +574,7 @@ p.about-text {
 
 
 /*--  text --*/
-.text {
-    background: url(../images/2.jpg) no-repeat center;
-    background-size: cover;
-    position: relative;
-}
+/* Removed unused text background class */
 .text:before {
     content: '';
     position: absolute;
@@ -767,22 +717,8 @@ footer{
 /*-- //footer --*/
 
 /*-- inner banner --*/
-.inner-banner{
-    background: url(../images/2.jpg) no-repeat center;
-    background-size: cover;
-	min-height: 250px;
-	position: relative;
-}
-.inner-banner:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.6;
-    background: #000;
-}
+/* Removed unused inner banner background class */
+/* Removed unused inner banner styles */
 /*-- //inner banner --*/
 
 /*-- about page --*/
@@ -865,11 +801,7 @@ h4.abt-text {
 /* //about bottom */
 
 /* stats */
-section.w3_stats {
-    background: url(../images/1.jpg) no-repeat center;
-    background-size: cover;
-    position: relative;
-}
+/* Removed unused stats background class */
 section.w3_stats h3.heading {
 	color: #fff;
 }
@@ -1178,12 +1110,7 @@ form.newsletter {
 /*-- //contact --*/  
 
 /*-- coming sooon page --*/
-.comingsoon {
-    background: url(../images/comingsoon.jpg) no-repeat center;
-    background-size: cover;
-    min-height: 250px;
-    position: relative;
-}
+/* Removed unused coming soon background class */
 .comingsoon h4 {
     font-size: 40px;
     font-weight: 600;
@@ -1213,14 +1140,10 @@ a.move-top {
 /*-- Responsive design --*/
 
 @media(max-width:1366px) {
-	.banner-top, .banner-top1, .banner-top2, .banner-top3,.overlay,.overlay1 {
-		min-height: 750px;
-	}
+	/* Removed unused banner classes */
 }
 @media(max-width:1280px) {
-	.banner-top, .banner-top1, .banner-top2, .banner-top3,.overlay,.overlay1 {
-		min-height: 720px;
-	}
+	/* Removed unused banner classes */
 }
 @media(max-width:1080px) {
 	.w3layouts-banner-info h3 {
@@ -1229,9 +1152,7 @@ a.move-top {
 	.w3layouts-banner-info {
 		padding-top: 14em;
 	}
-	.banner-top, .banner-top1, .banner-top2, .banner-top3,.overlay,.overlay1 {
-		min-height: 650px;
-	}
+	/* Removed unused banner classes */
 	p.about-text {
 		width: 85%;
 	}
@@ -1253,9 +1174,7 @@ a.move-top {
 	.feedback-info h4 {
 		letter-spacing: 2px;
 	}
-	.inner-banner {
-		min-height: 200px;
-	}
+	/* Removed unused inner banner class */
 }
 
 @media(max-width:991px) {
@@ -1280,9 +1199,7 @@ a.move-top {
 		letter-spacing: 3px;
 		line-height: 25px;
 	}	
-	.banner-top, .banner-top1, .banner-top2, .banner-top3,.overlay,.overlay1 {
-		min-height: 600px;
-	}
+	/* Removed unused banner classes */
 	.about-left h3 {
 		font-size: 29px;
 		letter-spacing: 1px;
@@ -1372,9 +1289,7 @@ a.move-top {
 	.welcome-grid span.fa {
 		font-size: 40px;
 	}
-	.inner-banner {
-		min-height: 150px;
-	}
+	/* Removed unused inner banner class */
 	.about-left h3 {
 		font-size: 24px;
 	}
@@ -1415,9 +1330,7 @@ a.move-top {
 		font-size: 20px;
 		letter-spacing: 2px;
 	}
-	.banner-top, .banner-top1, .banner-top2, .banner-top3, .overlay, .overlay1 {
-		min-height: 570px;
-	}
+	/* Removed unused banner classes */
 	.team-text h4 {
 		font-size: 18px;
 		letter-spacing: 1px;
@@ -1442,9 +1355,7 @@ a.move-top {
 	.blog-left, .blog-middle {
 		margin-bottom: 2em;
 	}
-	.banner-top, .banner-top1, .banner-top2, .banner-top3, .overlay, .overlay1 {
-		min-height: 520px;
-	}
+	/* Removed unused banner classes */
 	.blog-grids {
 		margin-bottom: 70px;
 	}
@@ -1462,9 +1373,7 @@ a.move-top {
 	.w3layouts-banner-info h3 {
 		font-size: 2.2em;
 	}
-	.banner-top, .banner-top1, .banner-top2, .banner-top3, .overlay, .overlay1 {
-		min-height: 500px;
-	}
+	/* Removed unused banner classes */
 	.w3layouts-banner-info {
 		padding-top: 8em;
 	}
@@ -1603,9 +1512,7 @@ a.move-top {
 		width: 38%;
 		font-size: 14px;
 	}
-	.inner-banner {
-		min-height: 130px;
-	}
+	/* Removed unused inner banner class */
 	.address-right {
 		padding-left: 1.5em;
 	}
